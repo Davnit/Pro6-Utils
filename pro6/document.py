@@ -6,7 +6,6 @@ import pro6.util as util
 
 from xml.etree import ElementTree as ET
 from xml.etree.ElementTree import ElementTree, Element
-import pathlib
 import os.path
 import base64
 import sys
@@ -432,8 +431,7 @@ class MediaElement(DisplayElement):
         # Set image size
         e.position = util.Rect3D(width, height)
 
-        plib = pathlib.Path(source)
-        e.set("source", plib.as_posix() if util.get_os() == OS_WINDOWS else plib.as_uri())
+        e.set("source", util.normalize_path(source))
         e.set("displayName", parts[0])
         return e
 

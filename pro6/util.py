@@ -474,6 +474,11 @@ def to_nums(value):
     return str(i) if i == value else str(value)
 
 
+def normalize_path(file_path):
+    plib = pathlib.Path(file_path)
+    return plib.as_posix() if get_os() == OS_WINDOWS else plib.as_uri()
+
+
 def find_abs_path(file_path, root, extension):
     if not os.path.isabs(file_path):
         file_path = os.path.join(root, file_path)
