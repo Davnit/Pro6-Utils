@@ -74,11 +74,11 @@ class Color:
 
     def get_value_string(self):
         parts = [self.r, self.g, self.b, self.a]
-        fmt = []
+        s = []
         for val in parts:
-            fmt.append("%i" if int(val) == val else "%f")
+            s.append(to_nums(val))
 
-        return ' '.join(fmt) % (self.r, self.g, self.b, self.a)
+        return ' '.join(s)
 
 
 class PointXY:
@@ -87,8 +87,7 @@ class PointXY:
         self.y = y
 
     def __str__(self):
-        fmt = "{%" + ("i" if int(self.x) == self.x else "f") + ", %" + ("i" if int(self.y) == self.y else "f") + "}"
-        return fmt % (self.x, self.y)
+        return "{%s, %s}" % (to_nums(self.x), to_nums(self.y))
 
     @classmethod
     def from_string(cls, s):
@@ -118,12 +117,10 @@ class Rect3D:
 
     def get_xml(self, name):
         parts = [self.x, self.y, self.rotation, self.width, self.height]
-        fmt = []
+        s = []
         for val in parts:
-            fmt.append("%i" if int(val) == val else "%f")
-
-        text = ("{" + ' '.join(fmt) + "}") % (self.x, self.y, self.rotation, self.width, self.height)
-        return XmlTextElement(text, name).get_xml(RV_RECT_3D)
+            s.append(to_nums(val))
+        return XmlTextElement("{%s}" % ' '.join(s), name).get_xml(RV_RECT_3D)
 
     @classmethod
     def from_xml(cls, element):
@@ -166,8 +163,8 @@ class Shadow:
 
 
     def get_xml(self):
-        text = ("%i" if int(self.radius) == self.radius else "%f") + "|%s|%s"
-        text = text % (self.radius, self.color.get_value_string(), str(self.source))
+        text = to_nums(self.radius) + "|%s|%s"
+        text = text % (self.color.get_value_string(), str(self.source))
         return XmlTextElement(text, "shadow").get_xml("shadow")
 
     @classmethod
@@ -468,6 +465,11 @@ def get_timestamp(dt=None):
 
 def to_bool(s):
     return str(s).lower() in ["true", "1"]
+
+
+def to_nums(value):
+    i = int(value or 0)
+    return str(i) if i == value else str(value)
 
 
 def xy_to_angle(x, y):
