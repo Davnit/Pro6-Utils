@@ -5,6 +5,7 @@ from uuid import uuid4
 from datetime import datetime
 from xml.etree.ElementTree import Element, ElementTree, SubElement
 import platform
+import math
 
 
 ATTRIB_VARNAME = "rvXMLIvarName"
@@ -150,6 +151,19 @@ class Shadow:
         self.radius = radius
         self.color = color or Color(0, 0, 0, 1)
         self.source = PointXY(2.82843, -2.82843)
+
+    def get_angle(self):
+        return int(round(xy_to_angle(self.source.x, self.source.y), 0))
+
+    def set_angle(self, angle):
+        self.source = PointXY(*angle_to_xy(angle, self.get_length()))
+
+    def get_length(self):
+        return int(round(math.hypot(self.source.x, self.source.y), 0))
+
+    def set_length(self, length):
+        self.source = PointXY(*angle_to_xy(self.get_angle(), length))
+
 
     def get_xml(self):
         text = ("%i" if int(self.radius) == self.radius else "%f") + "|%s|%s"
@@ -454,3 +468,32 @@ def get_timestamp(dt=None):
 
 def to_bool(s):
     return str(s).lower() in ["true", "1"]
+
+
+def xy_to_angle(x, y):
+    z = math.hypot(x, y)
+
+    cx = ((y*y + z*z - x*x) / (2 * y * z))
+    value = math.degrees(math.acos(cx))
+
+    if x > 0 and y > 0:
+        angle = 90 - value      # Quadrant 1
+    elif x < 0 and y < 0:
+        angle = 90 + value      # Quadrant 3
+    elif x < 0 and y > 0:
+        angle = 360 - value     # Quadrant 4
+    else:
+        angle = value           # Quadrant 2
+
+    return angle
+
+
+def angle_to_xy(angle, distance):
+    value = math.radians(angle)
+    x = distance * math.cos(value)
+    y = distance * math.sin(value)
+
+    if (angle > 90 and angle < 180) or (angle > 270 and angle < 360):
+        return y, x
+    else:
+        return x, y
