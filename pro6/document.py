@@ -24,6 +24,8 @@ RV_VIDEO_ELEMENT = "RVVideoElement"
 RV_SHAPE_ELEMENT = "RVShapeElement"
 RV_MEDIA_CUE = "RVMediaCue"
 
+DOCUMENT_EXTENSION = ".pro6"
+
 
 # Get base settings
 prefs = get_system_preferences()
@@ -668,7 +670,7 @@ class CopyrightInfo:
 
 
 class Pro6Document(util.XmlBackedObject):
-    def __init__(self, tree=None, **extra):
+    def __init__(self, name, tree=None, **extra):
         if tree is None:
             osi = util.get_os()
             default = {
@@ -694,7 +696,7 @@ class Pro6Document(util.XmlBackedObject):
         else:
             super().__init__(tree.getroot())
 
-        self.path = None
+        self.path = name
         self._tree = tree
 
         self.copyright = CopyrightInfo(self.get_element())
@@ -724,9 +726,14 @@ class Pro6Document(util.XmlBackedObject):
         self.copyright.save(self.get_element())
         super().save()
 
-        # Attach the path and write the file.
+        # Save as... new path
         if path is not None:
             self.path = path
+
+        # Use the absolute path if available otherwise assume the current library.
+        self.path = util.find_abs_path(self.path, prefs.general.library_path, DOCUMENT_EXTENSION)
+
+        # Write the tree to file
         self._tree.write(self.path)
 
     def append(self, obj):
@@ -856,7 +863,9 @@ class Pro6Document(util.XmlBackedObject):
     @staticmethod
     def load(path):
         """Returns a Document object representing the document at the specified path."""
-        document = Pro6Document(ET.parse(path))
+        path = util.find_abs_path(path, prefs.general.library_path, DOCUMENT_EXTENSION)
+
+        document = Pro6Document(path, ET.parse(path))
         document.path = path
         return document
 

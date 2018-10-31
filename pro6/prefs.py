@@ -121,12 +121,12 @@ class GeneralSettings:
     def __init__(self, document=None):
         self.logo_path = ""
         self.logo_preserve_aspect = False
-        self.user_data_path = ""
+        self.user_data_path = os.curdir
         self.user_data_type = 0
-        self.media_path = ""
+        self.media_path = os.curdir
         self.media_type = 0
-        self.library_name = "Default"
-        self.library_path = ""
+        self.library_name = "Current Directory"
+        self.library_path = os.curdir
         self.background_scaling = 3
         self.foreground_scaling = 0
 

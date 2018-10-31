@@ -4,6 +4,8 @@ from pro6.constants import *
 from uuid import uuid4
 from datetime import datetime
 from xml.etree.ElementTree import Element, ElementTree, SubElement
+import os.path
+import pathlib
 import platform
 import math
 
@@ -470,6 +472,14 @@ def to_bool(s):
 def to_nums(value):
     i = int(value or 0)
     return str(i) if i == value else str(value)
+
+
+def find_abs_path(file_path, root, extension):
+    if not os.path.isabs(file_path):
+        file_path = os.path.join(root, file_path)
+    if not file_path.endswith(extension):
+        file_path += extension
+    return file_path
 
 
 def xy_to_angle(x, y):
