@@ -455,7 +455,7 @@ class VideoElement(MediaElement):
                 "outPoint": "0",
                 "endPoint": "0",
                 "playRate": "1.0",
-                "playbackBehavior": "1",
+                "playbackBehavior": PLAY_STOP,
                 "timeScale": "600",
                 "naturalSize": "{0, 0}",
                 "fieldType": "0"
@@ -626,6 +626,8 @@ class SlideGroup(util.XmlBackedObject):
                 slide.append(obj)
             elif isinstance(obj, MediaCue):
                 slide.set_background(obj)
+                if isinstance(obj.get_media(), VideoElement):
+                    obj.set("playbackBehavior", PLAY_LOOP)
             else:
                 raise TypeError("Unsupported document sub-type: %s" % type(obj).__name__)
 
