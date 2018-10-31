@@ -1,7 +1,7 @@
 
 from pro6.constants import *
 from pro6.prefs import get_system_preferences
-from pro6.media import get_metadata
+import pro6.media as media
 import pro6.util as util
 
 from xml.etree import ElementTree as ET
@@ -228,14 +228,14 @@ class MediaCue(util.XmlBackedObject):
             if util.ATTRIB_VARNAME in obj.get_element().attrib:
                 del obj.get_element().attrib[util.ATTRIB_VARNAME]
 
-    def set_media(self, media):
+    def set_media(self, element):
         """Sets the media element that the cue is based on."""
-        if not isinstance(media, MediaElement):
+        if not isinstance(element, MediaElement):
             raise TypeError("Media must be a ProPresenter ImageElement or VideoElement.")
 
         if len(self._children) > 0:
             self.remove(self._children[0])
-        self.append(media)
+        self.append(element)
 
     def get_media(self):
         """Returns the media element that the cue is based on."""
@@ -408,9 +408,11 @@ class MediaElement(DisplayElement):
 
         parts = os.path.splitext(os.path.basename(source))
 
-        meta = get_metadata(source)
+        meta = media.get_metadata(source)
         if not meta:
             raise ValueError("Source is not a recognized media file: %s" % os.path.basename(source))
+
+        width, height = media.get_frame_size(meta)
 
         mime = meta.get("mime_type")
         if mime.startswith("image/"):
@@ -418,11 +420,14 @@ class MediaElement(DisplayElement):
             e.set("format", util.IMAGE_EXTENSIONS.get(parts[1][1:]))
         elif mime.startswith("video/"):
             e = VideoElement(None, **extra)
+            e.set("naturalSize", str(util.PointXY(width, height)))
+            length = media.get_length(meta)
+            e.set("outPoint", length)
+            e.set("endPoint", length)
         else:
             raise ValueError("Unsupported media type: %s (%s)" % (mime, parts[1][1:]))
 
         # Set image size
-        width, height = float(meta.get("width", str(output_width))), float(meta.get("height", str(output_height)))
         e.position = util.Rect3D(width, height)
 
         plib = pathlib.Path(source)
