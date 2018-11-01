@@ -1,5 +1,6 @@
 
-from pro6 import get_system_preferences, Pro6Document
+from pro6.prefs import get_system_preferences
+from pro6.document import Pro6Document
 
 from sys import exit
 from os import listdir
