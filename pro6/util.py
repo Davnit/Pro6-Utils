@@ -435,7 +435,8 @@ class XmlBackedObject:
                     if value == v:
                         to_remove = k
                         break
-            del e[to_remove]
+            if to_remove is not None:
+                del e.attrib[to_remove]
 
     def _find_root(self):
         parent = self.parent
