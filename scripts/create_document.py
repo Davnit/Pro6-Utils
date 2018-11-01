@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 from pro6.document import Pro6Document, MediaCue
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 from pro6.document import DOCUMENT_EXTENSION, MediaCue
 from pro6.playlist import PlaylistDocument, PlaylistNode, DocumentCue

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 from pro6.prefs import get_system_preferences
 
