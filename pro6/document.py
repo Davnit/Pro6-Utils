@@ -421,10 +421,10 @@ class MediaElement(DisplayElement):
             e.set("format", util.IMAGE_EXTENSIONS.get(parts[1][1:]))
         elif mime.startswith("video/"):
             e = VideoElement(None, **extra)
-            e.set("naturalSize", str(util.PointXY(width, height)))
+            e.natural_size = util.PointXY(width, height)
             length = media.get_length(meta)
-            e.set("outPoint", length)
-            e.set("endPoint", length)
+            e.set("outPoint", str(length))
+            e.set("endPoint", str(length))
         else:
             raise ValueError("Unsupported media type: %s (%s)" % (mime, parts[1][1:]))
 

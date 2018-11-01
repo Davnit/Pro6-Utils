@@ -470,7 +470,8 @@ def to_bool(s):
 
 
 def to_nums(value):
-    i = int(value or 0)
+    value = value or 0
+    i = int(value)
     return str(i) if i == value else str(value)
 
 
