@@ -9,22 +9,23 @@ def get_metadata(source):
     parser = hachoir.parser.createParser(source)
     if not parser:
         return None
-
     with parser:
-        try:
-            return hachoir.metadata.extractMetadata(parser)
-        except:
-            return None
+        return hachoir.metadata.extractMetadata(parser)
 
 
 def get_frame_size(source, default=None):
+    default = default or (0, 0)
+    if not isinstance(default, tuple) or len(default) != 2:
+        raise ValueError("Frame size default value not recognized. Must be (width, height).")
+
     meta = get_metadata(source) if isinstance(source, str) else source
-    if not meta or "width" not in meta or "height" not in meta:
-        default = default or (None, None)
-        if not isinstance(default, tuple) or len(default) != 2:
-            raise ValueError("Frame size default value not recognized. Must be (width, height).")
+    if meta is None:
         return default
-    return int(meta.get("width")), int(meta.get("height"))
+
+    try:
+        return int(meta.get("width")), int(meta.get("height"))
+    except ValueError:
+        return default
 
 
 def get_length(source, scale=600):
