@@ -164,7 +164,6 @@ class Shadow:
     def set_length(self, length):
         self.source = PointXY(*angle_to_xy(self.get_angle(), length))
 
-
     def get_xml(self):
         text = to_nums(self.radius) + "|%s|%s"
         text = text % (self.color.get_value_string(), str(self.source))
@@ -500,7 +499,7 @@ def xy_to_angle(x, y):
         angle = 90 - value      # Quadrant 1
     elif x < 0 and y < 0:
         angle = 90 + value      # Quadrant 3
-    elif x < 0 and y > 0:
+    elif x < 0 < y:
         angle = 360 - value     # Quadrant 4
     else:
         angle = value           # Quadrant 2
@@ -513,7 +512,7 @@ def angle_to_xy(angle, distance):
     x = distance * math.cos(value)
     y = distance * math.sin(value)
 
-    if (angle > 90 and angle < 180) or (angle > 270 and angle < 360):
+    if (180 > angle > 90) or (360 > angle > 270):
         return y, x
     else:
         return x, y
