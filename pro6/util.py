@@ -4,6 +4,7 @@ from pro6.constants import *
 from uuid import uuid4
 from datetime import datetime
 from xml.etree.ElementTree import Element, ElementTree, SubElement
+from urllib.parse import quote as url_quote
 import os.path
 import pathlib
 import platform
@@ -478,7 +479,7 @@ def to_nums(value):
 
 def normalize_path(file_path):
     plib = pathlib.Path(file_path)
-    return plib.as_posix() if get_os() == OS_WINDOWS else plib.as_uri()
+    return url_quote(plib.as_posix() if get_os() == OS_WINDOWS else plib.as_uri()).replace("/", "%5C")
 
 
 def find_abs_path(file_path, root, extension):
