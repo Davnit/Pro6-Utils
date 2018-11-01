@@ -29,16 +29,14 @@ def get_frame_size(source, default=None):
 
 def get_length(source, scale=600):
     meta = get_metadata(source) if isinstance(source, str) else source
-    dur = meta.get("duration", "0:0:0.0").split(":")
-    if len(dur) != 3:
+    if meta is None:
         return 0
 
-    value = 0.0
-    value += int(dur[0]) * 3600      # Hours to seconds
-    value += int(dur[1]) * 60       # Minutes to seconds
-    value += float(dur[2])          # Seconds + milliseconds
-
-    return value * int(scale)
+    try:
+        value = meta.get("duration").total_seconds()
+        return int(value * int(scale))
+    except ValueError:
+        return 0
 
 
 if __name__ == '__main__':
