@@ -32,7 +32,7 @@ def get_pref_path():
     if this_os == OS_WINDOWS:
         return path.join(os.getenv("APPDATA"), "RenewedVision", "ProPresenter6", "Preferences")
     elif this_os == OS_MACOSX:
-        return path.join(os.path.expanduser("~"), "Preferences", "com.renewedvision.ProPresenter6")
+        return path.join(os.path.expanduser("~"), "Library", "Preferences", "com.renewedvision.ProPresenter6")
 
 
 def try_get_text(element, default=""):
@@ -137,12 +137,12 @@ class GeneralSettings:
         if root.tag == RV_GENERAL_SETTINGS:
             self.logo_path = root.get("logoFilePath", self.logo_path)
             self.logo_preserve_aspect = util.to_bool(root.get("preserveLogoAspectRatio", str(self.logo_preserve_aspect)))
-            self.user_data_path = root.get("userDataPath", self.user_data_path)
+            self.user_data_path = util.expand_path(root.get("userDataPath", self.user_data_path))
             self.user_data_type = int(root.get("userDataType", str(self.user_data_type)))
-            self.media_path = root.get("mediaRepositoryPath", self.media_path)
+            self.media_path = util.expand_path(root.get("mediaRepositoryPath", self.media_path))
             self.media_type = int(root.get("mediaRepositoryType", str(self.media_type)))
             self.library_name = root.get("selectedLibraryName", self.library_name)
-            self.library_path = root.get("selectedLibraryPath", self.library_name)
+            self.library_path = util.expand_path(root.get("selectedLibraryPath", self.library_name))
             self.background_scaling = int(root.get("backgroundScaleBehavior", str(self.background_scaling)))
             self.foreground_scaling = int(root.get("foregroundScaleBehavior", str(self.foreground_scaling)))
 

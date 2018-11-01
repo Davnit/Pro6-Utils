@@ -486,7 +486,11 @@ def find_abs_path(file_path, root, extension):
         file_path = os.path.join(root, file_path)
     if not file_path.endswith(extension):
         file_path += extension
-    return file_path
+    return expand_path(file_path)
+
+
+def expand_path(file_path):
+    return os.path.expanduser(os.path.expandvars(file_path))
 
 
 def xy_to_angle(x, y):
