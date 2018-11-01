@@ -509,7 +509,7 @@ class DisplaySlide(util.XmlBackedObject):
         # Check for a background element
         back_media = self._find_by("backgroundMediaCue", tag=RV_MEDIA_CUE)
         if back_media is not None:
-            self.append(MediaCue(None, back_media))
+            super().append(MediaCue(None, back_media))
 
         # Load foreground elements
         self._display_elements = self._find_by("displayElements", tag="array", force=True)
