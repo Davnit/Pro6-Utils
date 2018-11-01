@@ -1,5 +1,5 @@
 
-from pro6 import Pro6Document, MediaCue
+from pro6.document import Pro6Document, MediaCue
 
 from os import listdir
 from os.path import basename, splitext, isdir, isfile, join

@@ -1,5 +1,5 @@
 
-from pro6 import get_system_preferences
+from pro6.prefs import get_system_preferences
 
 from sys import argv, exit
 from os import curdir
