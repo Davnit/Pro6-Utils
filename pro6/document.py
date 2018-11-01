@@ -168,7 +168,7 @@ class MediaCue(util.XmlBackedObject):
 
             default = {
                 "UUID": util.get_uuid(),
-                "displayName": os.path.splitext(os.path.basename(source))[0],
+                "displayName": os.path.basename(source),
                 "alignment": ALIGN_CENTER,
                 "behavior": "0",
                 "actionType": "0",
@@ -432,7 +432,7 @@ class MediaElement(DisplayElement):
         e.position = util.Rect3D(width, height)
 
         e.set("source", util.normalize_path(source))
-        e.set("displayName", parts[0])
+        e.set("displayName", parts[0] + parts[1])
         return e
 
 
