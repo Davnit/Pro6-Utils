@@ -8,5 +8,5 @@ setup(
     description='Utilities for manipulating ProPresenter 6 and its files.',
     author='Davnit',
     author_email='david@davnit.net',
-    install_requires=['hachoir']
+    install_requires=['hachoir>=3.0a3']
 )
