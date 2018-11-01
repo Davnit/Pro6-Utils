@@ -185,13 +185,13 @@ class MediaCue(util.XmlBackedObject):
             super().__init__(element)
 
             # Set the child media element
-            element = self._element.find("*")
-            if element.tag == RV_IMAGE_ELEMENT:
-                self.set_media(ImageElement(element))
-            elif element.tag == RV_VIDEO_ELEMENT:
-                self.set_media(VideoElement(element))
+            child = self._element.find("*")
+            if child.tag == RV_IMAGE_ELEMENT:
+                self.set_media(ImageElement(child))
+            elif child.tag == RV_VIDEO_ELEMENT:
+                self.set_media(VideoElement(child))
             else:
-                raise Exception("Unexpected MediaCue child: %s" % element.tag)
+                raise Exception("Unexpected MediaCue child: %s" % child.tag)
 
         self.is_background = (self.get(util.ATTRIB_VARNAME) == "backgroundMediaCue")
 
