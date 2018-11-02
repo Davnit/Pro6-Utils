@@ -275,8 +275,7 @@ class DisplayElement(util.XmlBackedObject):
             "rotation": "0.000000",
             "drawingFill": "false",
             "drawingShadow": "false",
-            "drawingStroke": "false",
-            "fillColor": "1 1 1 1"
+            "drawingStroke": "false"
         }
 
     def save(self):
@@ -499,7 +498,8 @@ class DisplaySlide(util.XmlBackedObject):
                 "notes": "",
                 "drawingBackgroundColor": "false",
                 "chordChartPath": "",
-                "UUID": util.get_uuid()
+                "UUID": util.get_uuid(),
+                "socialItemCount": "1"
             }
             element = Element(RV_DISPLAY_SLIDE, default, **extra)
 
@@ -682,6 +682,7 @@ class Pro6Document(util.XmlBackedObject):
                 "chordChartPath": "",
                 "docType": "0",
                 "drawingBackgroundColor": "false",
+                "backgroundColor": "0 0 0 0",
                 "lastDateUsed": "",
                 "notes": "",
                 "os": osi,
