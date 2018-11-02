@@ -286,12 +286,9 @@ class DisplayElement(util.XmlBackedObject):
         self.fill_color = self.fill_color or util.Color(1, 1, 1, 1)
 
         # We don't track the actual elements for these as children so just replace them.
-        self._remove_by("position", tag=util.RV_RECT_3D)
-        self._element.append(self.position.get_xml("position"))
-        self._remove_by("shadow", tag="shadow")
-        self._element.append(self.shadow.get_xml())
-        self._remove_by("stroke", tag="dictionary")
-        self._element.append(self.stroke.get_xml())
+        self.position.write(self._find_by("position", tag=util.RV_RECT_3D, force=True))
+        self.shadow.write(self._find_by("shadow", tag="shadow", force=True))
+        self.stroke.write(self._find_by("stroke", tag="dictionary", force=True))
 
         self.set("fillColor", self.fill_color.get_value_string())
         super()._save_uuid()

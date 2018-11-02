@@ -4,7 +4,7 @@ from pro6.constants import *
 from uuid import uuid4
 from datetime import datetime
 from xml.etree.ElementTree import Element, ElementTree, SubElement
-from urllib.parse import quote as url_quote
+from urllib.parse import unquote, urlparse
 import os.path
 import pathlib
 import platform
@@ -118,12 +118,12 @@ class Rect3D:
     def set_xy(self, x, y):
         self.x, self.y = x, y
 
-    def get_xml(self, name):
+    def write(self, element):
         parts = [self.x, self.y, self.rotation, self.width, self.height]
         s = []
         for val in parts:
             s.append(to_nums(val))
-        return XmlTextElement("{%s}" % ' '.join(s), name).get_xml(RV_RECT_3D)
+        element.text = "{%s}" % ' '.join(s)
 
     @classmethod
     def from_xml(cls, element):
@@ -146,7 +146,7 @@ class Rect3D:
 
 
 class Shadow:
-    def __init__(self, radius=4.0, color=None):
+    def __init__(self, radius=4.000000, color=None):
         self.enabled = True
         self.radius = radius
         self.color = color or Color(0, 0, 0, 1)
@@ -164,10 +164,8 @@ class Shadow:
     def set_length(self, length):
         self.source = PointXY(*angle_to_xy(self.get_angle(), length))
 
-    def get_xml(self):
-        text = to_nums(self.radius) + "|%s|%s"
-        text = text % (self.color.get_value_string(), str(self.source))
-        return XmlTextElement(text, "shadow").get_xml("shadow")
+    def write(self, element):
+        element.text = "%f|%s|%s" % (self.radius, self.color.get_value_string(), str(self.source))
 
     @classmethod
     def from_xml(cls, element):
@@ -199,12 +197,14 @@ class Stroke:
         self.width = width
         self.color = color or Color(0, 0, 0, 1)
 
-    def get_xml(self):
-        d = {
-            RV_SHAPE_ELEMENT_STROKE_COLOR_KEY: self.color.get_value_string(),
-            RV_SHAPE_ELEMENT_STROKE_WIDTH_KEY: self.width
-        }
-        return to_xml_dictionary(d, "stroke")
+    def write(self, element):
+        xbo = XmlBackedObject(element)  # The _find_by() function is really helpful here.
+
+        color = xbo._find_by(RV_SHAPE_ELEMENT_STROKE_COLOR_KEY, ATTRIB_DICT_KEY, NS_STRING, True)
+        color.text = self.color.get_value_string()
+        width = xbo._find_by(RV_SHAPE_ELEMENT_STROKE_WIDTH_KEY, ATTRIB_DICT_KEY, NS_NUMBER, True)
+        width.set("hint", "integer" if int(self.width) == self.width else "float")
+        width.text = to_nums(self.width)
 
     @classmethod
     def from_xml(cls, element):
