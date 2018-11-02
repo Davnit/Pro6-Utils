@@ -37,7 +37,7 @@ class DocumentCue(util.XmlBackedObject):
             default = {
                 "UUID": util.get_uuid(),
                 "displayName": os.path.basename(file),
-                "filePath": util.normalize_path(file),
+                "filePath": util.prepare_path(file),
                 "selectedArrangementID": "00000000-0000-0000-0000-000000000000",
                 "actionType": "0",
                 "enabled": "true",

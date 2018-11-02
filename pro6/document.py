@@ -387,8 +387,8 @@ class MediaElement(DisplayElement):
 
     def save(self):
         source = self.get("source")
-        if source is not None:
-            self.set("displayName", os.path.splitext(os.path.basename(source))[0])
+        if source is not None and len(source) > 0:
+            self.set("displayName", os.path.basename(util.unprepare_path(source)))
         else:
             self.set("displayName", "Default")
 
@@ -408,7 +408,7 @@ class MediaElement(DisplayElement):
         if source is None or not isinstance(source, str):
             raise TypeError("Source must be the path to a media file.")
 
-        parts = os.path.splitext(os.path.basename(source))
+        parts = os.path.splitext(os.path.basename(util.unprepare_path(source)))
 
         meta = media.get_metadata(source)
         if not meta:
@@ -432,8 +432,7 @@ class MediaElement(DisplayElement):
         # Set image size
         e.position = util.Rect3D(width, height)
 
-        e.set("source", util.normalize_path(source))
-        e.set("displayName", parts[0] + parts[1])
+        e.set("source", util.prepare_path(source))
         return e
 
 

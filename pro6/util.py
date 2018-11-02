@@ -476,9 +476,13 @@ def to_nums(value):
     return str(i) if i == value else str(value)
 
 
-def normalize_path(file_path):
+def prepare_path(file_path):
     plib = pathlib.Path(file_path)
-    return url_quote(plib.as_posix() if get_os() == OS_WINDOWS else plib.as_uri()).replace("/", "%5C")
+    return plib.as_posix() if get_os() == OS_WINDOWS else plib.as_uri()
+
+
+def unprepare_path(file_path):
+    return unquote(urlparse(file_path).path if file_path.startswith("file:") else file_path)
 
 
 def find_abs_path(file_path, root, extension):
