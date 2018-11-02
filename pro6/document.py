@@ -145,8 +145,10 @@ class Timeline(util.XmlBackedObject):
                       key=lambda cue: int(cue.get("slideIndex")))
 
     def clear(self):
+        """Removes all of the cues from the timeline and resets the duration."""
         for cue in self.cues():
             self.remove(cue)
+        self.set("duration", "0.000000")
 
     def set_interval(self, interval):
         """Sets the interval between cues, in seconds.
