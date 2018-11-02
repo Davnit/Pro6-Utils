@@ -110,8 +110,8 @@ class Timeline(util.XmlBackedObject):
             default = {
                 util.ATTRIB_VARNAME: "timeline",
                 "loop": "false",
-                "playBackRate": "1.0",
-                "duration": "0",
+                "playBackRate": "1.000000",
+                "duration": "0.000000",
                 "timeOffset": "0.000000",
                 "selectedMediaTrackIndex": "0"
             }
@@ -377,7 +377,7 @@ class MediaElement(DisplayElement):
             "flippedVertically": "false",
             "imageOffset": "{0, 0}",
             "scaleSize": "{1, 1}",
-            "opacity": "1.0",
+            "opacity": "1.000000",
             "manufactureName": "",
             "manufactureURL": "",
             "format": ""
@@ -450,11 +450,11 @@ class VideoElement(MediaElement):
             default = super()._get_defaults()
             default.update({
                 "frameRate": "0.000000",
-                "audioVolume": "1.0",
+                "audioVolume": "1.000000",
                 "inPoint": "0",
                 "outPoint": "0",
                 "endPoint": "0",
-                "playRate": "1.0",
+                "playRate": "1.000000",
                 "playbackBehavior": PLAY_STOP,
                 "timeScale": "600",
                 "naturalSize": "{0, 0}",
