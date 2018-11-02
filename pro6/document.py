@@ -638,8 +638,6 @@ class SlideGroup(util.XmlBackedObject):
                 slide.append(obj)
             elif isinstance(obj, MediaCue):
                 slide.set_background(obj)
-                if isinstance(obj.get_media(), VideoElement):
-                    obj.set("playbackBehavior", PLAY_LOOP)
             else:
                 raise TypeError("Unsupported document sub-type: %s" % type(obj).__name__)
 
