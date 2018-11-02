@@ -693,7 +693,8 @@ class Pro6Document(util.XmlBackedObject):
                 "os": osi,
                 "resourcesDirectory": "",
                 "selectedArrangementID": "",
-                "usedCount": "0"
+                "usedCount": "0",
+                "UUID": util.get_uuid().upper()
             }
             tree = ElementTree(Element(RV_PRESENTATION_DOCUMENT, default, **extra))
 
