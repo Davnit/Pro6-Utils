@@ -566,6 +566,11 @@ class DisplaySlide(util.XmlBackedObject):
 
             parent.remove(obj.get_element())
 
+    def clear(self):
+        """Removes all of the elements and media from the slide."""
+        for child in self._children:
+            self.remove(child)
+
     def elements(self):
         """Returns a list of slide elements on the slide."""
         return [element for element in self._children if isinstance(element, DisplayElement)]
@@ -782,6 +787,19 @@ class Pro6Document(util.XmlBackedObject):
     def slides(self):
         """Returns all of the slides from the document."""
         return [s for slides in self.groups() for s in slides if isinstance(s, DisplaySlide)]
+
+    def clear(self):
+        """Clears all of the slides, groups, and arrangements from this document and resets the timeline."""
+        for child in self._children:
+            if not isinstance(child, Timeline):
+                self.remove(child)
+            else:
+                child.clear()   # Reset the timeline
+
+        # Reset arrangements
+        arrange = self._find_by("arrangements", tag="array", force=True)
+        arrange.clear()
+        arrange.set(util.ATTRIB_VARNAME, "arrangements")
 
     def create_slideshow(self, interval, loop=False):
         if not isinstance(interval, (int, float)):
