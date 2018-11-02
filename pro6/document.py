@@ -543,6 +543,11 @@ class DisplaySlide(util.XmlBackedObject):
         super()._save_uuid()
         super().save()
 
+        # Re-order elements
+        element = self.get_element()
+        element.remove(self._display_elements)
+        element.append(self._display_elements)
+
     def append(self, obj):
         """Adds a text or media element to the slide."""
         if isinstance(obj, DisplayElement):
