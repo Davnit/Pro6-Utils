@@ -734,6 +734,9 @@ class Pro6Document(util.XmlBackedObject):
             If a path is specified, the changes will be written to that file.
         """
         self.copyright.save(self.get_element())
+        if len(self.groups()) == 0:
+            self.append(SlideGroup())
+
         super().save()
 
         # Save as... new path
