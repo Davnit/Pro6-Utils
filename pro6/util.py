@@ -425,19 +425,6 @@ class XmlBackedObject:
         else:
             return None
 
-    def _remove_by(self, value, name=None, tag=None):
-        name = name or ATTRIB_VARNAME
-
-        for e in self._element.findall(tag):
-            to_remove = None
-            for k, v in e.items():
-                if name.lower() == k.lower():
-                    if value == v:
-                        to_remove = k
-                        break
-            if to_remove is not None:
-                del e.attrib[to_remove]
-
     def _find_root(self):
         parent = self.parent
         while parent is not None:
