@@ -561,6 +561,8 @@ class DisplaySlide(util.XmlBackedObject):
                 parent = self._display_elements
             elif isinstance(obj, SlideTimerCue):
                 parent = self._cues
+            elif isinstance(obj, MediaCue):
+                parent = self.get_element()
             else:
                 raise TypeError("Something happened. Unsupported element was removed: %s" % type(obj).__name__)
 
