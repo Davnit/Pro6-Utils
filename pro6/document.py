@@ -579,17 +579,22 @@ class DisplaySlide(util.XmlBackedObject):
         return [cue for cue in self._children if isinstance(cue, SlideTimerCue)]
 
     def get_background(self):
+        """Returns the background media cue for the slide, or None."""
         cues = [cue for cue in self._children if isinstance(cue, MediaCue)]
         return None if len(cues) == 0 else cues[0]
 
     def set_background(self, background):
-        if not isinstance(background, MediaCue):
-            raise TypeError("Background must be a MediaCue.")
-        self.remove(self.get_background())
+        """Sets the background media cue for the slide. Use None to remove the background."""
+        if background is None:
+            self.remove(self.get_background())
+        else:
+            if not isinstance(background, MediaCue):
+                raise TypeError("Background must be a MediaCue or None.")
+            self.remove(self.get_background())
 
-        background.is_background = True
-        super().append(background)
-        self.get_element().append(background.get_element())
+            background.is_background = True
+            super().append(background)
+            self.get_element().append(background.get_element())
 
 
 class SlideGroup(util.XmlBackedObject):
