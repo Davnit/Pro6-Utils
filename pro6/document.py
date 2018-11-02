@@ -652,6 +652,9 @@ class SlideGroup(util.XmlBackedObject):
         """Returns a list of slides in the group."""
         return [slide for slide in self._children if isinstance(slide, DisplaySlide)]
 
+    def __len__(self):
+        return len(self.slides())
+
 
 class CopyrightInfo:
     def __init__(self, d=None):
@@ -828,6 +831,9 @@ class Pro6Document(util.XmlBackedObject):
     def find_object_by_uuid(self, uuid, tag=None):
         """Returns an object from the document represented by the given UUID."""
         return self._deep_search(uuid, "UUID", tag)
+
+    def __len__(self):
+        return len(self.slides())
 
     def print_outline(self):
         """Prints an outline of the document, it's groups, slides, and the elements on them."""
