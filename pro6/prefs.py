@@ -26,6 +26,8 @@ scaling = {
 
 found_preferences = {}
 
+PP_NOT_FOUND = False
+
 
 def get_pref_path():
     this_os = util.get_os()
@@ -44,13 +46,17 @@ def try_get_text(element, default=""):
 
 
 def get_system_preferences():
+    global PP_NOT_FOUND
+
     pp = get_pref_path()
     if pp in found_preferences:
         return found_preferences.get(pp)
     else:
         if not path.isdir(pp):
             # ProPresenter 6 isn't installed, hasn't been run, or we couldn't find the settings.
-            print("ProPresenter's configuration files could not be found. Using default settings.")
+            if not PP_NOT_FOUND:
+                print("ProPresenter's configuration files could not be found. Using default settings.")
+                PP_NOT_FOUND = True
             pp = None
 
         prefs = ProPresenter6Preferences(pp)
