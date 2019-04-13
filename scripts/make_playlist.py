@@ -15,6 +15,7 @@ prefs = get_system_preferences()
 parser = ArgumentParser()
 parser.add_argument('playlist_name', help='The name of the playlist.')
 parser.add_argument('files', nargs='*', help='A list of files to add to the playlist as cues.')
+parser.add_argument('-o', '--overwrite', action='store_true', help='Overwrites the playlist if it already exists.')
 
 
 def import_file(playlist, file_path):
@@ -36,38 +37,43 @@ def import_file(playlist, file_path):
 args = parser.parse_args()
 list_name = args.playlist_name
 
-# Find the currently active playlist
+# Find the currently active playlist file
 doc = PlaylistDocument.get_current()
 print("Using playlist: %s" % doc.path)
 
 # Find the location where the new playlist should go
-play = doc
+parent = doc
 while "/" in list_name:
-    s = list_name.split("/", maxsplit=1)
-    sub = play.find(s[0])
+    path = list_name.split("/", maxsplit=1)
+    sub = parent.find(path[0])
     if sub is None:
-        print("Adding node: %s" % s[0])
-        sub = PlaylistNode(s[0], NODE_TYPE_FOLDER)
-        play.append(sub)
-    play = sub
-    list_name = s[1]
+        print("Adding node: %s" % path[0])
+        sub = PlaylistNode(path[0], NODE_TYPE_FOLDER)
+        parent.append(sub)
+        parent = sub
+    list_name = path[1]
 
-# If the playlist already exists, overwrite it.
-pl = play.find(list_name)
-if pl is not None:
-    pl.clear()
+target = parent.find(list_name)
+if target is not None:
+    # Playlist already exists. Do we want to overwrite it?
+    if args.overwrite:
+        print("Overwriting existing playlist...")
+        target.clear()
+    else:
+        print("Playlist already exists. Files will be added to the end of it.")
+        print("To overwrite an existing playlist, use the --overwrite option.")
 else:
-    playlist = PlaylistNode(list_name, NODE_TYPE_PLAYLIST)
-    play.append(pl)
+    target = PlaylistNode(list_name, NODE_TYPE_PLAYLIST)
+    parent.append(target)
 
 # Import the specified files
 if args.files and len(args.files) > 0:
     for file in args.files:
         if isdir(file):
             for sf in listdir(file):
-                import_file(pl, join(file, sf))
+                import_file(target, join(file, sf))
         else:
-            import_file(pl, file)
+            import_file(target, file)
 
 # Save the playlist
 doc.save()
