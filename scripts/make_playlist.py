@@ -6,12 +6,15 @@ from pro6.util import find_abs_path
 from pro6.prefs import get_system_preferences
 from pro6.constants import *
 
+from argparse import ArgumentParser
 from os import listdir
 from os.path import basename, splitext, isdir, join, isabs
-from sys import argv, exit
-
 
 prefs = get_system_preferences()
+
+parser = ArgumentParser()
+parser.add_argument('playlist_name', help='The name of the playlist.')
+parser.add_argument('files', nargs='*', help='A list of files to add to the playlist as cues.')
 
 
 def import_file(playlist, file_path):
@@ -30,12 +33,8 @@ def import_file(playlist, file_path):
         print("failed: %s" % ex)
 
 
-if len(argv) < 2:
-    print("Invalid arguments, format: <playlist name> [files...]")
-    exit(1)
-
-list_name = argv[1]
-files = [] if len(argv) == 2 else argv[2:]
+args = parser.parse_args()
+list_name = args.playlist_name
 
 # Find the currently active playlist
 doc = PlaylistDocument.get_current()
@@ -62,8 +61,8 @@ else:
     play.append(pl)
 
 # Import the specified files
-if len(files) > 0:
-    for file in files:
+if args.files and len(args.files) > 0:
+    for file in args.files:
         if isdir(file):
             for sf in listdir(file):
                 import_file(pl, join(file, sf))
@@ -72,4 +71,4 @@ if len(files) > 0:
 
 # Save the playlist
 doc.save()
-print("Playlist saved to '%s'." % argv[1])
+print("Playlist saved to '%s'." % args.playlist_name)
