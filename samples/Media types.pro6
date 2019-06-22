@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RVPresentationDocument height="720"
+                        width="1280"
+                        docType="0"
+                        versionNumber="600"
+                        usedCount="0"
+                        backgroundColor="0 0 0 1"
+                        drawingBackgroundColor="false"
+                        CCLIDisplay="false"
+                        lastDateUsed=""
+                        selectedArrangementID=""
+                        category="Presentation"
+                        resourcesDirectory=""
+                        notes=""
+                        CCLISongTitle=""
+                        chordChartPath=""
+                        os="1"
+                        buildNumber="6016">
+  <RVTimeline timeOffset="0"
+              duration="0"
+              selectedMediaTrackIndex="-1"
+              loop="false"
+              rvXMLIvarName="timeline">
+    <array rvXMLIvarName="timeCues" />
+    <array rvXMLIvarName="mediaTracks" />
+  </RVTimeline>
+  <array rvXMLIvarName="groups">
+    <RVSlideGrouping name=""
+                     color="1 1 1 0"
+                     uuid="9F8ECCFD-BAFC-4749-8632-2C859DD9FEF9">
+      <array rvXMLIvarName="slides">
+        <RVDisplaySlide backgroundColor="0 0 0 1"
+                        highlightColor="1 1 1 0"
+                        drawingBackgroundColor="false"
+                        enabled="true"
+                        hotKey=""
+                        label="Background image"
+                        notes=""
+                        UUID="7707AABD-212A-4FF7-A17C-36BE79A822BF"
+                        chordChartPath="">
+          <array rvXMLIvarName="cues" />
+          <RVMediaCue UUID="C06E21A3-3B60-4E5A-8378-E4904811A24E"
+                      displayName="vlcsnap-2018-01-09-01h21m05s663.png"
+                      actionType="0"
+                      enabled="1"
+                      timeStamp="0"
+                      delayTime="0"
+                      tags=""
+                      nextCueUUID="00000000-0000-0000-0000-000000000000"
+                      behavior="1"
+                      alignment="4"
+                      dateAdded=""
+                      rvXMLIvarName="backgroundMediaCue">
+            <RVImageElement rvXMLIvarName="element"
+                            displayName="vlcsnap-2018-01-09-01h21m05s663.png"
+                            UUID="c06e21a3-3b60-4e5a-8378-e4904811a24e"
+                            displayDelay="0"
+                            locked="0"
+                            persistent="0"
+                            typeID="0"
+                            fromTemplate="0"
+                            bezelRadius="0"
+                            drawingFill="0"
+                            drawingShadow="0"
+                            drawingStroke="0"
+                            fillColor="1 1 1 1"
+                            rotation="0"
+                            source="C%3A%5CUsers%5CDavid%5CPictures%5Cvlcsnap-2018-01-09-01h21m05s663.png"
+                            flippedHorizontally="false"
+                            flippedVertically="false"
+                            scaleBehavior="3"
+                            manufactureURL=""
+                            manufactureName=""
+                            format=""
+                            scaleSize="{1.0, 1.0}"
+                            imageOffset="{0.0, 0.0}">
+              <RVRect3D rvXMLIvarName="position">{0 0 0 0 0}</RVRect3D>
+              <shadow rvXMLIvarName="shadow">0|0 0 0 0|{0, 0}</shadow>
+              <dictionary rvXMLIvarName="stroke">
+                <NSColor rvXMLDictionaryKey="RVShapeElementStrokeColorKey">0 0 0 1</NSColor>
+                <NSNumber rvXMLDictionaryKey="RVShapeElementStrokeWidthKey"
+                          hint="float">1.0</NSNumber>
+              </dictionary>
+              <array rvXMLIvarName="effects" />
+            </RVImageElement>
+          </RVMediaCue>
+          <array rvXMLIvarName="displayElements">
+            <RVTextElement displayName="Default"
+                           UUID="d7afd6f1-da87-4ed4-bc44-1afb502d1463"
+                           typeID="0"
+                           displayDelay="0"
+                           locked="false"
+                           persistent="0"
+                           fromTemplate="false"
+                           opacity="1"
+                           source=""
+                           bezelRadius="0"
+                           rotation="0"
+                           drawingFill="false"
+                           drawingShadow="false"
+                           drawingStroke="false"
+                           fillColor="1 1 1 1"
+                           adjustsHeightToFit="false"
+                           verticalAlignment="0"
+                           revealType="0">
+              <RVRect3D rvXMLIvarName="position">{38 28 0 1205 664}</RVRect3D>
+              <shadow rvXMLIvarName="shadow">4|0 0 0 1|{2.82843, -2.82843}</shadow>
+              <dictionary rvXMLIvarName="stroke">
+                <NSColor rvXMLDictionaryKey="RVShapeElementStrokeColorKey">1 1 1 1</NSColor>
+                <NSNumber rvXMLDictionaryKey="RVShapeElementStrokeWidthKey"
+                          hint="double">0</NSNumber>
+              </dictionary>
+              <NSString rvXMLIvarName="PlainText">RG91YmxlLWNsaWNrIHRvIGVkaXQ=</NSString>
+              <NSString rvXMLIvarName="RTFData">e1xydGYxXHByb3J0ZjFcYW5zaVxhbnNpY3BnMTI1Mlx1YzFcaHRtYXV0c3BcZGVmZjJ7XGZvbnR0Ymx7XGYwXGZjaGFyc2V0MCBUaW1lcyBOZXcgUm9tYW47fXtcZjJcZmNoYXJzZXQwIEdlb3JnaWE7fXtcZjNcZmNoYXJzZXQwIEhlbHZldGljYTt9fXtcY29sb3J0Ymw7XHJlZDBcZ3JlZW4wXGJsdWUwO1xyZWQyNTVcZ3JlZW4yNTVcYmx1ZTI1NTt9XGxvY2hcaGljaFxkYmNoXHBhcmRcc2xsZWFkaW5nMFxwbGFpblxsdHJwYXJcaXRhcDB7XGxhbmcxMDMzXGZzMzJcb3V0bDBcc3Ryb2tld2lkdGgtMjBcc3Ryb2tlYzFcZjJcY2YxIFxjZjFccWx7XGZzOTVcb3V0bDBcc3Ryb2tld2lkdGgtMjBcc3Ryb2tlYzFcZjMge1xjZjJcbHRyY2ggRG91YmxlLWNsaWNrIHRvIGVkaXR9XGxpMFxzYTBcc2IwXGZpMFxxY1xwYXJ9DQp9DQp9</NSString>
+              <NSString rvXMLIvarName="WinFlowData">PEZsb3dEb2N1bWVudCBUZXh0QWxpZ25tZW50PSJMZWZ0IiB4bWxucz0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93aW5meC8yMDA2L3hhbWwvcHJlc2VudGF0aW9uIj48UGFyYWdyYXBoIFRleHRBbGlnbm1lbnQ9IkNlbnRlciI+PFJ1biBGb250RmFtaWx5PSJIZWx2ZXRpY2EiIEZvbnRTdHlsZT0iTm9ybWFsIiBGb250V2VpZ2h0PSJOb3JtYWwiIEZvbnRTdHJldGNoPSJOb3JtYWwiIEZvbnRTaXplPSI0Ny41IiBGb3JlZ3JvdW5kPSIjRkZGRkZGRkYiIEJsb2NrLlRleHRBbGlnbm1lbnQ9IkNlbnRlciI+PFJ1bi5UZXh0RGVjb3JhdGlvbnM+PFRleHREZWNvcmF0aW9uQ29sbGVjdGlvbiAvPjwvUnVuLlRleHREZWNvcmF0aW9ucz5Eb3VibGUtY2xpY2sgdG8gZWRpdDwvUnVuPjwvUGFyYWdyYXBoPjwvRmxvd0RvY3VtZW50Pg==</NSString>
+              <NSString rvXMLIvarName="WinFontData">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTE2Ij8+PFJWRm9udCB4bWxuczppPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM9Imh0dHA6Ly9zY2hlbWFzLmRhdGFjb250cmFjdC5vcmcvMjAwNC8wNy9Qcm9QcmVzZW50ZXIuQ29tbW9uIj48S2VybmluZz4wPC9LZXJuaW5nPjxMaW5lU3BhY2luZz4wPC9MaW5lU3BhY2luZz48T3V0bGluZUNvbG9yIHhtbG5zOmQycDE9Imh0dHA6Ly9zY2hlbWFzLmRhdGFjb250cmFjdC5vcmcvMjAwNC8wNy9TeXN0ZW0uV2luZG93cy5NZWRpYSI+PGQycDE6QT4yNTU8L2QycDE6QT48ZDJwMTpCPjA8L2QycDE6Qj48ZDJwMTpHPjA8L2QycDE6Rz48ZDJwMTpSPjA8L2QycDE6Uj48ZDJwMTpTY0E+MTwvZDJwMTpTY0E+PGQycDE6U2NCPjA8L2QycDE6U2NCPjxkMnAxOlNjRz4wPC9kMnAxOlNjRz48ZDJwMTpTY1I+MDwvZDJwMTpTY1I+PC9PdXRsaW5lQ29sb3I+PE91dGxpbmVXaWR0aD4xPC9PdXRsaW5lV2lkdGg+PFZhcmlhbnRzPk5vcm1hbDwvVmFyaWFudHM+PC9SVkZvbnQ+</NSString>
+            </RVTextElement>
+          </array>
+        </RVDisplaySlide>
+        <RVDisplaySlide backgroundColor="0 0 0 1"
+                        highlightColor="1 1 1 0"
+                        drawingBackgroundColor="false"
+                        enabled="true"
+                        hotKey=""
+                        label="Foreground image"
+                        UUID="0F0E2367-AA17-46B4-86E6-F13BBCE7A045"
+                        chordChartPath="">
+          <array rvXMLIvarName="cues" />
+          <RVMediaCue UUID="288E05B8-CCC4-452F-90F3-F21A35B08791"
+                      displayName="vlcsnap-2018-01-09-01h21m05s663.png"
+                      actionType="0"
+                      enabled="1"
+                      timeStamp="0"
+                      delayTime="0"
+                      tags=""
+                      nextCueUUID="00000000-0000-0000-0000-000000000000"
+                      behavior="2"
+                      alignment="4"
+                      dateAdded=""
+                      rvXMLIvarName="backgroundMediaCue">
+            <RVImageElement rvXMLIvarName="element"
+                            displayName="vlcsnap-2018-01-09-01h21m05s663.png"
+                            UUID="288e05b8-ccc4-452f-90f3-f21a35b08791"
+                            displayDelay="0"
+                            locked="0"
+                            persistent="0"
+                            typeID="0"
+                            fromTemplate="0"
+                            bezelRadius="0"
+                            drawingFill="0"
+                            drawingShadow="0"
+                            drawingStroke="0"
+                            fillColor="1 1 1 1"
+                            rotation="0"
+                            source="C%3A%5CUsers%5CDavid%5CPictures%5Cvlcsnap-2018-01-09-01h21m05s663.png"
+                            flippedHorizontally="false"
+                            flippedVertically="false"
+                            scaleBehavior="0"
+                            manufactureURL=""
+                            manufactureName=""
+                            format=""
+                            scaleSize="{1.0, 1.0}"
+                            imageOffset="{0.0, 0.0}">
+              <RVRect3D rvXMLIvarName="position">{0 0 0 0 0}</RVRect3D>
+              <shadow rvXMLIvarName="shadow">0|0 0 0 0|{0, 0}</shadow>
+              <dictionary rvXMLIvarName="stroke">
+                <NSColor rvXMLDictionaryKey="RVShapeElementStrokeColorKey">0 0 0 1</NSColor>
+                <NSNumber rvXMLDictionaryKey="RVShapeElementStrokeWidthKey"
+                          hint="float">1.0</NSNumber>
+              </dictionary>
+              <array rvXMLIvarName="effects" />
+            </RVImageElement>
+          </RVMediaCue>
+          <array rvXMLIvarName="displayElements" />
+        </RVDisplaySlide>
+        <RVDisplaySlide backgroundColor="0 0 0 1"
+                        highlightColor="1 1 1 0"
+                        drawingBackgroundColor="false"
+                        enabled="true"
+                        hotKey=""
+                        label="Image object"
+                        notes=""
+                        UUID="74C12CCD-1A69-4A93-8225-24926D50D904"
+                        chordChartPath="">
+          <array rvXMLIvarName="cues" />
+          <array rvXMLIvarName="displayElements">
+            <RVImageElement UUID="cdc5453a-47b6-4737-9229-e679c102ebe9"
+                            typeID="0"
+                            displayDelay="0"
+                            locked="false"
+                            persistent="0"
+                            fromTemplate="false"
+                            opacity="1"
+                            source="C%3A%5CUsers%5CDavid%5CPictures%5Cvlcsnap-2018-01-09-01h21m05s663.png"
+                            displayName="Default"
+                            bezelRadius="0"
+                            rotation="0"
+                            drawingFill="false"
+                            drawingShadow="false"
+                            drawingStroke="false"
+                            fillColor="1 1 1 1"
+                            scaleBehavior="0"
+                            flippedHorizontally="0"
+                            flippedVertically="0"
+                            scaleSize="{1, 1}"
+                            imageOffset="{0, 0}"
+                            manufactureURL=""
+                            manufactureName=""
+                            format="">
+              <RVRect3D rvXMLIvarName="position">{136.5 20.5 0 1007 679}</RVRect3D>
+              <shadow rvXMLIvarName="shadow">0|0 0 0 1|{4.94974746830583, -4.94974746830583}</shadow>
+              <dictionary rvXMLIvarName="stroke">
+                <NSColor rvXMLDictionaryKey="RVShapeElementStrokeColorKey">0 0 0 1</NSColor>
+                <NSNumber rvXMLDictionaryKey="RVShapeElementStrokeWidthKey"
+                          hint="double">0</NSNumber>
+              </dictionary>
+            </RVImageElement>
+            <RVTextElement displayName="Default"
+                           UUID="eb4ddae2-9c42-4c36-bfd0-4b5e67e98b3e"
+                           typeID="0"
+                           displayDelay="0"
+                           locked="false"
+                           persistent="0"
+                           fromTemplate="false"
+                           opacity="1"
+                           source=""
+                           bezelRadius="0"
+                           rotation="0"
+                           drawingFill="false"
+                           drawingShadow="false"
+                           drawingStroke="false"
+                           fillColor="1 1 1 1"
+                           adjustsHeightToFit="false"
+                           verticalAlignment="0"
+                           revealType="0">
+              <RVRect3D rvXMLIvarName="position">{38 28 0 1205 664}</RVRect3D>
+              <shadow rvXMLIvarName="shadow">4|0 0 0 1|{2.82843, -2.82843}</shadow>
+              <dictionary rvXMLIvarName="stroke">
+                <NSColor rvXMLDictionaryKey="RVShapeElementStrokeColorKey">1 1 1 1</NSColor>
+                <NSNumber rvXMLDictionaryKey="RVShapeElementStrokeWidthKey"
+                          hint="double">0</NSNumber>
+              </dictionary>
+              <NSString rvXMLIvarName="PlainText">RG91YmxlLWNsaWNrIHRvIGVkaXQ=</NSString>
+              <NSString rvXMLIvarName="RTFData">e1xydGYxXHByb3J0ZjFcYW5zaVxhbnNpY3BnMTI1Mlx1YzFcaHRtYXV0c3BcZGVmZjJ7XGZvbnR0Ymx7XGYwXGZjaGFyc2V0MCBUaW1lcyBOZXcgUm9tYW47fXtcZjJcZmNoYXJzZXQwIEdlb3JnaWE7fXtcZjNcZmNoYXJzZXQwIEhlbHZldGljYTt9fXtcY29sb3J0Ymw7XHJlZDBcZ3JlZW4wXGJsdWUwO1xyZWQyNTVcZ3JlZW4yNTVcYmx1ZTI1NTt9XGxvY2hcaGljaFxkYmNoXHBhcmRcc2xsZWFkaW5nMFxwbGFpblxsdHJwYXJcaXRhcDB7XGxhbmcxMDMzXGZzMzJcb3V0bDBcc3Ryb2tld2lkdGgtMjBcc3Ryb2tlYzFcZjJcY2YxIFxjZjFccWx7XGZzOTVcb3V0bDBcc3Ryb2tld2lkdGgtMjBcc3Ryb2tlYzFcZjMge1xjZjJcbHRyY2ggRG91YmxlLWNsaWNrIHRvIGVkaXR9XGxpMFxzYTBcc2IwXGZpMFxxY1xwYXJ9DQp9DQp9</NSString>
+              <NSString rvXMLIvarName="WinFlowData">PEZsb3dEb2N1bWVudCBUZXh0QWxpZ25tZW50PSJMZWZ0IiB4bWxucz0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93aW5meC8yMDA2L3hhbWwvcHJlc2VudGF0aW9uIj48UGFyYWdyYXBoIFRleHRBbGlnbm1lbnQ9IkNlbnRlciI+PFJ1biBGb250RmFtaWx5PSJIZWx2ZXRpY2EiIEZvbnRTdHlsZT0iTm9ybWFsIiBGb250V2VpZ2h0PSJOb3JtYWwiIEZvbnRTdHJldGNoPSJOb3JtYWwiIEZvbnRTaXplPSI0Ny41IiBGb3JlZ3JvdW5kPSIjRkZGRkZGRkYiIEJsb2NrLlRleHRBbGlnbm1lbnQ9IkNlbnRlciI+PFJ1bi5UZXh0RGVjb3JhdGlvbnM+PFRleHREZWNvcmF0aW9uQ29sbGVjdGlvbiAvPjwvUnVuLlRleHREZWNvcmF0aW9ucz5Eb3VibGUtY2xpY2sgdG8gZWRpdDwvUnVuPjwvUGFyYWdyYXBoPjwvRmxvd0RvY3VtZW50Pg==</NSString>
+              <NSString rvXMLIvarName="WinFontData">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTE2Ij8+PFJWRm9udCB4bWxuczppPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM9Imh0dHA6Ly9zY2hlbWFzLmRhdGFjb250cmFjdC5vcmcvMjAwNC8wNy9Qcm9QcmVzZW50ZXIuQ29tbW9uIj48S2VybmluZz4wPC9LZXJuaW5nPjxMaW5lU3BhY2luZz4wPC9MaW5lU3BhY2luZz48T3V0bGluZUNvbG9yIHhtbG5zOmQycDE9Imh0dHA6Ly9zY2hlbWFzLmRhdGFjb250cmFjdC5vcmcvMjAwNC8wNy9TeXN0ZW0uV2luZG93cy5NZWRpYSI+PGQycDE6QT4yNTU8L2QycDE6QT48ZDJwMTpCPjA8L2QycDE6Qj48ZDJwMTpHPjA8L2QycDE6Rz48ZDJwMTpSPjA8L2QycDE6Uj48ZDJwMTpTY0E+MTwvZDJwMTpTY0E+PGQycDE6U2NCPjA8L2QycDE6U2NCPjxkMnAxOlNjRz4wPC9kMnAxOlNjRz48ZDJwMTpTY1I+MDwvZDJwMTpTY1I+PC9PdXRsaW5lQ29sb3I+PE91dGxpbmVXaWR0aD4xPC9PdXRsaW5lV2lkdGg+PFZhcmlhbnRzPk5vcm1hbDwvVmFyaWFudHM+PC9SVkZvbnQ+</NSString>
+            </RVTextElement>
+          </array>
+        </RVDisplaySlide>
+      </array>
+    </RVSlideGrouping>
+  </array>
+  <array rvXMLIvarName="arrangements" />
+</RVPresentationDocument>

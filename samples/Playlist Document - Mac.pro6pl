@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<RVPlaylistDocument versionNumber="600"
+                    os="2"
+                    buildNumber="16245">
+    <RVPlaylistNode displayName="root"
+                    UUID="B29148CE-0A7D-4245-8201-91F613374509"
+                    smartDirectoryURL=""
+                    modifiedDate="2019-05-18T06:26:38-04:00"
+                    type="0"
+                    isExpanded="false"
+                    hotFolderType="2"
+                    rvXMLIvarName="rootNode">
+        <array rvXMLIvarName="children">
+            <RVPlaylistNode displayName="Default"
+                            UUID="6C6EE365-9506-471F-A91F-8168248DD484"
+                            smartDirectoryURL=""
+                            modifiedDate="2018-10-08T18:44:31-04:00"
+                            type="3"
+                            isExpanded="false"
+                            hotFolderType="2">
+                <array rvXMLIvarName="children">
+                    <RVDocumentCue UUID="5423BF0F-C881-40DD-A262-E5EF928C865D"
+                                   displayName="Welcome To ProPresenter 6"
+                                   actionType="0"
+                                   enabled="false"
+                                   timeStamp="0.000000"
+                                   delayTime="0.000000"
+                                   filePath="~/Documents/ProPresenter6/Welcome To ProPresenter 6.pro6"
+                                   selectedArrangementID=""/>
+                </array>
+                <array rvXMLIvarName="events"/>
+            </RVPlaylistNode>
+            <RVPlaylistNode displayName="Default Playlist - Mac"
+                            UUID="7978A3D6-C164-41C0-BE3E-05702B23292E"
+                            smartDirectoryURL=""
+                            modifiedDate="2019-05-18T06:26:38-04:00"
+                            type="3"
+                            isExpanded="false"
+                            hotFolderType="2">
+                <array rvXMLIvarName="children"/>
+                <array rvXMLIvarName="events"/>
+            </RVPlaylistNode>
+        </array>
+        <array rvXMLIvarName="events"/>
+    </RVPlaylistNode>
+    <array rvXMLIvarName="deletions"/>
+    <array rvXMLIvarName="tags"/>
+</RVPlaylistDocument>

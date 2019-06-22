@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RVPlaylistDocument versionNumber="600"
+                    os="1"
+                    buildNumber="6016">
+    <RVPlaylistNode displayName="root"
+                    UUID="9BCEE42F-9D89-4F7E-8D32-27F14AA3223F"
+                    smartDirectoryURL=""
+                    modifiedDate="2019-05-18T10:31:03+00:00"
+                    type="0"
+                    isExpanded="0"
+                    hotFolderType="2"
+                    rvXMLIvarName="rootNode">
+        <array rvXMLIvarName="children">
+            <RVPlaylistNode displayName="Default"
+                            UUID="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                            smartDirectoryURL=""
+                            modifiedDate="2019-05-18T10:38:14+00:00"
+                            type="3"
+                            isExpanded="true"
+                            hotFolderType="2">
+                <array rvXMLIvarName="children">
+                    <RVDocumentCue UUID="2EB4E78C-D0B4-46C0-91C5-84D2911A0BBC"
+                                   displayName="Welcome To ProPresenter 6.pro6"
+                                   filePath="C%3A%5CUsers%5CDavid%5CDocuments%5CProPresenter6%5CWelcome%20To%20ProPresenter%206.pro6"
+                                   selectedArrangementID="00000000-0000-0000-0000-000000000000"
+                                   actionType="0"
+                                   enabled="1"
+                                   timeStamp="0"
+                                   delayTime="0" />
+                </array>
+                <array rvXMLIvarName="events" />
+            </RVPlaylistNode>
+            <RVPlaylistNode displayName="New Playlist - PC"
+                            UUID="909de494-9492-49ea-95c6-857a8477d661"
+                            smartDirectoryURL=""
+                            modifiedDate="2019-05-18T10:31:09+00:00"
+                            type="3"
+                            isExpanded="true"
+                            hotFolderType="2">
+                <array rvXMLIvarName="children" />
+                <array rvXMLIvarName="events" />
+            </RVPlaylistNode>
+        </array>
+        <array rvXMLIvarName="events" />
+    </RVPlaylistNode>
+    <array rvXMLIvarName="deletions" />
+</RVPlaylistDocument>

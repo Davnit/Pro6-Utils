@@ -1,0 +1,30 @@
+
+RV_VERSION_NUMBER = 600
+
+# Operating system constants
+OS_WINDOWS = 1
+OS_MACOSX = 2
+
+# Scaling behaviors
+SCALE_FIT = "0"
+SCALE_FILL = "1"
+SCALE_STRETCH = "3"
+
+# Content alignments
+ALIGN_TOP_LEFT = "0"
+ALIGN_TOP_CENTER = "1"
+ALIGN_TOP_RIGHT = "2"
+ALIGN_MIDDLE_LEFT = "3"
+ALIGN_CENTER = "4"
+ALIGN_MIDDLE_RIGHT = "5"
+ALIGN_BOTTOM_LEFT = "6"
+ALIGN_BOTTOM_CENTER = "7"
+ALIGN_BOTTOM_RIGHT = "8"
+
+# Playback behaviors
+PLAYBACK_STOP = "0"
+PLAYBACK_LOOP = "1"
+
+# Layers
+LAYER_BACKGROUND = "1"
+LAYER_FOREGROUND = "2"
