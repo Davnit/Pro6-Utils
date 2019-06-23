@@ -32,8 +32,8 @@ class Timeline(XmlBackedObject):
         defaults.update(extra)
         super().__init__("RVTimeline", defaults)
 
-        self.offset = 0
-        self.duration = 0
+        self.offset = 0.0
+        self.duration = 0.0
         self.selected_track = -1
         self.loop = False
         self.cues = []
@@ -56,8 +56,8 @@ class Timeline(XmlBackedObject):
     def read(self, element):
         super().read(element)
 
-        self.offset = int(element.get("timeOffset", str(self.offset)))
-        self.duration = int(element.get("duration", str(self.duration)))
+        self.offset = float(element.get("timeOffset", str(self.offset)))
+        self.duration = float(element.get("duration", str(self.duration)))
         self.selected_track = int(element.get("selectedMediaTrackIndex", str(self.selected_track)))
         self.loop = (element.get("loop") == "true")
 
