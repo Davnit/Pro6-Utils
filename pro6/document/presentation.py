@@ -41,11 +41,7 @@ class PresentationDocument(XmlBackedObject):
         self.notes = None
         self.background_color = None
 
-        # Create the default group.
-        group = SlideGroup()
-        group.slides.append(DisplaySlide())
-
-        self.groups = [group]
+        self.groups = [SlideGroup()]
         self.arrangements = []
         self.timeline = Timeline()
 
