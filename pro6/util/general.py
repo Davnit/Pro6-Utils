@@ -20,7 +20,7 @@ def prepare_path(path_str, enviro=None):
     if enviro == OS_WINDOWS:
         return quote(os.path.normpath(pth.as_posix()))
     else:
-        return quote(pth.as_uri()).replace("file%3A///", "file://")
+        return pth.as_uri().replace("file:///", "file://localhost/")
 
 
 def unprepare_path(path_str):
