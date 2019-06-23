@@ -2,6 +2,7 @@
 from .elements import MEDIA_ELEMENTS, MediaElement, AudioElement
 
 from ..util.constants import *
+from ..util.general import unprepare_path
 from ..util.xmlhelp import XmlBackedObject, RV_XML_VARNAME
 
 from os import path
@@ -12,7 +13,7 @@ class MediaCue(XmlBackedObject):
         super().__init__("RVMediaCue", extra)
         self.source = source
 
-        self.display_name = path.basename(source)
+        self.display_name = path.basename(source) if source else None
         self.alignment = ALIGN_CENTER
         self.layer = LAYER_FOREGROUND
         self.action = "0"               # TODO: Figure out what this is.
@@ -22,7 +23,7 @@ class MediaCue(XmlBackedObject):
         self.tags = None
         self.timestamp = 0.0
 
-        self.element = element or MediaElement.create(self.source)
+        self.element = element or (MediaElement.create(self.source) if source else None)
         self.next_cue = None            # UUID of linked cue object
 
     def write(self):
@@ -72,7 +73,8 @@ class MediaCue(XmlBackedObject):
             raise ValueError("Ambiguous MediaCue child elements. Found %i." % len(children))
 
         if children[0].tag in MEDIA_ELEMENTS:
-            self.element = MEDIA_ELEMENTS[children[0].tag]().read(children[0])
+            source = unprepare_path(children[0].get("source"))
+            self.element = MEDIA_ELEMENTS[children[0].tag](source).read(children[0])
             self.source = self.element.source
         else:
             print("Unsupported media element found in cue '%s': %s" % (self.display_name, children[0].tag))

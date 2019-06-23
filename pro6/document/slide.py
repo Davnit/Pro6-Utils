@@ -71,7 +71,7 @@ class DisplaySlide(XmlBackedObject):
         self.cues = []
         for e in element.find("array[@" + RV_XML_VARNAME + "='cues']"):
             if e.tag == "RVAudioCue":
-                self.cues.append(AudioCue(e.get("source")).read(e))
+                self.cues.append(AudioCue(None).read(e))
             else:
                 self.cues.append(e)
 
@@ -86,5 +86,5 @@ class DisplaySlide(XmlBackedObject):
         # Read background
         e = element.find("RVMediaCue[@" + RV_XML_VARNAME + "='backgroundMediaCue']")
         if e:
-            self.background = MediaCue(e.get("source")).read(e)
+            self.background = MediaCue(None).read(e)
         return self
