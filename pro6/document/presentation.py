@@ -85,7 +85,7 @@ class PresentationDocument(XmlBackedObject):
             self.groups.remove(item)
         elif isinstance(item, DisplaySlide):
             for group in self.groups:
-                if item in group.slides():
+                if item in group.slides:
                     group.slides.remove(item)
                     return
             raise ValueError("Slide '%s' not found in document." % item.label)
