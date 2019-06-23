@@ -2,6 +2,8 @@
 import hachoir.parser
 import hachoir.metadata
 
+from os import path
+
 
 MEDIA_FORMATS = {
     "jpg": "JPEG image",
@@ -16,12 +18,16 @@ class MediaFile:
         self.source = source
         self.metadata = {}
 
-        parser = hachoir.parser.createParser(source)
-        if not parser:
-            raise Exception("Unable to extract metadata from file '%s'" % source)
+        if self.exists():
+            parser = hachoir.parser.createParser(source)
+            if not parser:
+                raise Exception("Unable to extract metadata from file '%s'" % source)
 
-        with parser:
-            self.metadata = hachoir.metadata.extractMetadata(parser)
+            with parser:
+                self.metadata = hachoir.metadata.extractMetadata(parser)
+
+    def exists(self):
+        return path.isfile(self.source)
 
     def frame_size(self, default=None):
         """ Returns a tuple containing (width, height) of the media content. """
