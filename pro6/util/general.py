@@ -17,7 +17,10 @@ def create_uuid():
 def prepare_path(path_str, enviro=None):
     enviro = enviro or get_os()
     pth = pathlib.Path(path_str)
-    return quote(pth.as_posix().replace('/', '\\') if enviro == OS_WINDOWS else pth.as_uri())
+    if enviro == OS_WINDOWS:
+        return quote(os.path.normpath(pth.as_posix()))
+    else:
+        return quote(pth.as_uri()).replace("file%3A///", "file://")
 
 
 def unprepare_path(path_str):
