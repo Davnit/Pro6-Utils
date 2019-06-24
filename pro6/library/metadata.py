@@ -1,7 +1,22 @@
 
-from ..document import PresentationDocument
+from ..util.general import parse_date, unprepare_path
+from ..util.xmlhelp import RV_XML_VARNAME
 
 from os import path
+import xml.etree.ElementTree as Xml
+
+
+class CCLI:
+    def __init__(self, values):
+        self.number = values.get("CCLISongNumber")
+        self.artist = values.get("CCLIArtistCredits")
+        self.author = values.get("CCLIAuthor")
+        self.year = values.get("CCLICopyrightYear")
+        if len(self.year) > 0:
+            self.year = int(self.year)
+        self.display = values.get("CCLIDisplay", "false").lower() in ["true", "1"]
+        self.title = values.get("CCLISongTitle")
+        self.publisher = values.get("CCLIPublisher")
 
 
 class DocumentMetadata:
@@ -15,16 +30,28 @@ class DocumentMetadata:
         self.used_count = 0
         self.slide_count = 0
         self.uuid = None
+        self.copyright = None
         self.media = []
 
-    def update(self, document=None):
+    def update(self):
         """ Reads metadata from the document file. """
-        doc = document or PresentationDocument.load(self.path)
-        self.category = doc.category
-        self.last_used = doc.last_used
-        self.height = doc.height
-        self.width = doc.width
-        self.used_count = doc.used_count
-        self.slide_count = len(doc.slides())
-        self.uuid = doc.get_uuid()
-        self.media = [s.background.element.source for s in doc.slides() if s.background]
+        root = Xml.parse(self.path).getroot()
+
+        self.category = root.get("category", self.category)
+        self.last_used = parse_date(root.get("lastDateUsed", self.last_used))
+        self.height = int(root.get("height", self.height))
+        self.width = int(root.get("width", self.width))
+        self.used_count = int(root.get("usedCount", self.used_count))
+        self.uuid = root.get("uuid", self.uuid)
+        self.copyright = CCLI(root)
+
+        slides = root.findall(".//RVDisplaySlide")
+        self.slide_count = len(slides)
+
+        self.media = []
+        for slide in slides:
+            background = slide.find("./RVMediaCue[@" + RV_XML_VARNAME + "='backgroundMediaCue']")
+            if background:
+                source = list(background)[0].get("source")
+                if source:
+                    self.media.append(source)
