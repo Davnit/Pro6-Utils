@@ -12,7 +12,7 @@ import xml.etree.ElementTree as Xml
 class DocumentLibrary:
     def __init__(self, title, library_path=None):
         self.title = title
-        self.path = library_path
+        self.path = path.normpath(path.expanduser(library_path))
         self.documents = {}
 
         for file in listdir(self.path):

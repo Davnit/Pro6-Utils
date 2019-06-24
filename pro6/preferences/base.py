@@ -1,5 +1,4 @@
 
-from ..library import DocumentLibrary
 from .error import InstallNotFoundError, InvalidInstallError
 from ..util.compat import *
 from ..util.constants import SCALE_FIT, SCALE_FILL, SCALE_STRETCH
@@ -37,7 +36,7 @@ class Pro6Preferences:
         self.libraries = {
             "Default": os.path.join(os.path.expanduser("~"), "Documents", "ProPresenter6")
         }
-        self._library = None
+        self.active_library = "Default"
 
         self.logo_path = None
         self.foreground_scaling = SCALE_FIT         # Scale to fit
@@ -59,13 +58,13 @@ class Pro6Preferences:
         """ Changes the active library in this context (does not change it on the system). """
         for title, lib_path in self.libraries.items():
             if title.lower() == new_library.lower():
-                self._library = DocumentLibrary(title, lib_path)
+                self.active_library = title
                 return self.get_library()
         return None
 
     def get_library(self):
-        """ Returns the active library. """
-        return self._library
+        """ Returns the path to the active library. """
+        return self.libraries.get(self.active_library)
 
     @classmethod
     def load(cls, file=None):

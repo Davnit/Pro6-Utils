@@ -88,7 +88,7 @@ def main():
             title = "Imported files"
 
     # Save the document to disk (prefers: --outdir, active library, current directory)
-    doc.path = path.join(args.outdir or (library.path if library else curdir()), title + ".pro6")
+    doc.path = path.join(args.outdir or library or curdir(), title + ".pro6")
     doc.write()
     if library and not args.outdir:
         print("Document saved to library: %s" % title)

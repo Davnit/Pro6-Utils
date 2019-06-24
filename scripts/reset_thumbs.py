@@ -18,10 +18,10 @@ def main():
             print("ERROR: No ProPresenter installation found.")
             exit(1)
         library = pro6_install.get_library()
-        if not library:
+        if not path.isdir(library):
             print("ERROR: ProPresenter library not found.")
             exit(1)
-        args.document = path.join(library.path, args.document + ".pro6")
+        args.document = path.join(library, args.document + ".pro6")
     else:
         args.document = path.expanduser(path.normpath(args.document))
 
