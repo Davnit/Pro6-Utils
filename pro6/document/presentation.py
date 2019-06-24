@@ -8,6 +8,7 @@ from ..preferences import active as pro6_install
 
 from ..util.compat import *
 from ..util.constants import RV_VERSION_NUMBER
+from ..util.general import parse_date
 from ..util.xmlhelp import XmlBackedObject, create_array, RV_XML_VARNAME
 
 from os import path
@@ -137,7 +138,7 @@ class PresentationDocument(XmlBackedObject):
         self.width = int(element.get("width", str(self.width)))
         self.category = element.get("category", str(self.category))
         self.used_count = int(element.get("usedCount", str(self.used_count)))
-        self.last_used = element.get("lastDateUsed", self.last_used)
+        self.last_used = parse_date(element.get("lastDateUsed", self.last_used))
         self.notes = element.get("notes", self.notes)
         self.background_color = element.get("backgroundColor") \
             if element.get("drawingBackgroundColor") == "true" else None

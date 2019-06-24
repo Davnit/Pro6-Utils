@@ -1,7 +1,8 @@
 
-from pro6.util.general import create_uuid
+from .general import create_uuid, format_date
 
 from abc import ABC, abstractmethod
+from datetime import datetime
 import math
 import xml.etree.ElementTree as Xml
 
@@ -78,6 +79,8 @@ class XmlBackedObject(ABC):
                 attrib[k] = ""
             elif isinstance(v, bool):
                 attrib[k] = str(v).lower()
+            elif isinstance(v, datetime):
+                attrib[k] = format_date(v)
             elif not isinstance(v, str):
                 attrib[k] = str(v)
 

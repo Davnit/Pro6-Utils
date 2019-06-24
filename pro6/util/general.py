@@ -1,6 +1,7 @@
 
 from pro6.util.compat import *
 
+from datetime import datetime
 import os
 import pathlib
 from urllib.parse import quote, unquote, urlparse
@@ -30,3 +31,17 @@ def unprepare_path(path_str):
 
     path_str = unquote(path_str)       # Remove Windows/HTML character encoding (%20 == ' ', etc)
     return os.path.expanduser(os.path.expandvars(path_str))     # Expand OS variables
+
+
+def parse_date(s):
+    if not s or len(s) == 0:
+        return None
+    elif len(s) == 25:
+        # Remove the colon from the UTC offset specifier.
+        s = s[:22] + s[23:]
+    return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S%z")
+
+
+def format_date(dt):
+    s = dt.strftime("%Y-%m-%dT%H:%M:%S%z")
+    return s if len(s) == 19 else s[:22] + ':' + s[22:]
