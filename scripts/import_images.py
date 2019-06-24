@@ -37,18 +37,14 @@ def import_file(document, file_path):
 
 def main():
     # Look for a ProPresenter installation to use default values from.
-    library = None
-    try:
+    if pro6_install:
         default_size = (pro6_install.output_width, pro6_install.output_height)
         scaling = {v: k for k, v in SCALE_MODES.items()}.get(pro6_install.foreground_scaling)
         library = pro6_install.get_library()
-    except FileNotFoundError:
+    else:
         default_size = (1280, 720)
         scaling = "fit"
-        print("Notice: ProPresenter 6 installation not found. Default values will be used.")
-    except ValueError as ve:
-        print("Error: A problem was found with your ProPresenter installation:", ve)
-        sys.exit(1)
+        library = None
 
     parser = ArgumentParser(description="Loads a directory or list of images into a ProPresenter document.")
     parser.add_argument("files", type=str, nargs='+', help="Path(s) of files or directories to import.")

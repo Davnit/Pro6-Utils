@@ -1,5 +1,6 @@
 
 from ..library import DocumentLibrary
+from .error import InstallNotFoundError, InvalidInstallError
 from ..util.compat import *
 from ..util.constants import SCALE_FIT, SCALE_FILL, SCALE_STRETCH
 from ..util.xmlhelp import RV_XML_VARNAME
@@ -15,7 +16,7 @@ def _get_prefs_path():
     elif this_os == OS_MACOSX:
         return os.path.join(os.path.expanduser("~"), "Library", "Preferences", "com.renewedvision.ProPresenter6")
     else:
-        raise ValueError("Unsupported operating system: " % platform.system())
+        return None
 
 
 def _win_scaling_to_int(value):
@@ -78,8 +79,8 @@ class Pro6Preferences:
         obj = cls()
         obj.location = file or _get_prefs_path()
 
-        if not os.path.isdir(obj.location):
-            raise FileNotFoundError("ProPresenter configuration not found or invalid path specified.")
+        if not (obj.location and os.path.isdir(obj.location)):
+            raise InstallNotFoundError()
 
         # Check for general preferences file
         if os.path.isfile(os.path.join(obj.location, "GeneralSettings.xml")):
@@ -87,14 +88,14 @@ class Pro6Preferences:
         elif os.path.isfile(os.path.join(obj.location, "GeneralPreferences.pro6pref")):
             obj._load_win_prefs()
         else:
-            raise FileNotFoundError("Unable to locate general preferences file in config directory.")
+            raise InstallNotFoundError()
 
         return obj
 
     def _load_mac_prefs(self):
         general = Xml.parse(os.path.join(self.location, "GeneralSettings.xml"))
         if general.getroot().tag != "RVGeneralSettings":
-            raise ValueError("Unrecognized configuration format in GeneralSettings.xml.")
+            raise InvalidInstallError("Unrecognized format in GeneralSettings.xml.")
 
         # Load the list of available document libraries.
         self.libraries = {}
@@ -116,11 +117,11 @@ class Pro6Preferences:
         # Display settings in a different file
         display_path = os.path.join(self.location, "DisplaySettings.xml")
         if not os.path.isfile(display_path):
-            raise FileNotFoundError("Unable to locate display preferences file in config directory.")
+            raise InstallNotFoundError()
 
         display = Xml.parse(display_path)
         if display.getroot().tag != "RVDisplaySettings":
-            raise ValueError("Unrecognized configuration format in DisplaySettings.xml.")
+            raise InvalidInstallError("Unrecognized format in DisplaySettings.xml.")
 
         root = display.getroot()
         self.output_width = int(root.get("outputWidth", self.output_width))
@@ -129,7 +130,7 @@ class Pro6Preferences:
     def _load_win_prefs(self):
         general = Xml.parse(os.path.join(self.location, "GeneralPreferences.pro6pref"))
         if general.getroot().tag != "{" + win_ns["pref"] + "}RVPreferencesGeneral":
-            raise ValueError("Unrecognized configuration format in GeneralPreferences.pro6pref.")
+            raise InvalidInstallError("Unrecognized format in GeneralPreferences.pro6pref.")
 
         # Load list of available document libraries.
         self.libraries = {}
@@ -145,7 +146,7 @@ class Pro6Preferences:
         # For some reason with windows the scaling settings are in a separate, small file.
         adv_path = os.path.join(self.location, "AdvancedPreferences.pro6pref")
         if not os.path.isfile(adv_path):
-            raise FileNotFoundError("Unable to locate advanced preferences file in config directory.")
+            raise InstallNotFoundError()
 
         advanced = Xml.parse(adv_path)
         self.foreground_scaling = _win_scaling_to_int(
@@ -156,11 +157,11 @@ class Pro6Preferences:
         # Display settings still in a separate file
         display_path = os.path.join(self.location, "DisplayPreferences.pro6pref")
         if not os.path.isfile(display_path):
-            raise FileNotFoundError("Unable to locate display preferences file in config directory.")
+            raise InstallNotFoundError()
 
         display = Xml.parse(display_path)
         if display.getroot().tag != "{" + win_ns["pref"] + "}RVPreferencesDisplay":
-            raise ValueError("Unrecognized configuration format in DisplayPreferences.pro6pref.")
+            raise InvalidInstallError("Unrecognized format in DisplayPreferences.pro6pref.")
 
         self.output_width = int(display.findtext("pref:ScreenWidth", self.output_width, win_ns))
         self.output_height = int(display.findtext("pref:ScreenHeight", self.output_height, win_ns))

@@ -1,7 +1,8 @@
 
 from .base import Pro6Preferences
+from .error import InstallNotFoundError, InvalidInstallError
 
 try:
     active = Pro6Preferences.load()
-except (FileNotFoundError, ValueError):
+except (InstallNotFoundError, InvalidInstallError):
     active = None
