@@ -1,4 +1,5 @@
 
+from .metadata import DocumentMetadata
 from ..util.xmlhelp import RV_XML_VARNAME
 
 import base64
@@ -12,12 +13,17 @@ class DocumentLibrary:
     def __init__(self, title, library_path=None):
         self.title = title
         self.path = library_path
-        self.documents = []
+        self.documents = {}
 
         for file in listdir(self.path):
             parts = path.splitext(file)
             if parts[1].lower() == ".pro6":
-                self.documents.append(path.basename(parts[0]))
+                meta = DocumentMetadata(path.join(self.path, file))
+                self.documents[meta.name] = meta
+
+    def load_metadata(self):
+        for meta in self.documents.values():
+            meta.update()
 
     def exists(self, title):
         """ Checks if a document with the given title is in the library. Case-insensitive. """
