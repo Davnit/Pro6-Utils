@@ -175,7 +175,7 @@ class MediaElement(DisplayElement):
             raise TypeError("Media element source must be a filename (str).")
 
         file = MediaFile(source)
-        mime = file.metadata.get("mime_type")
+        mime = file.get_metadata().get("mime_type")
         if mime.startswith("image/"):
             return ImageElement(file, **extra)
         elif mime.startswith("video/"):
