@@ -49,10 +49,12 @@ class Pro6Preferences:
         if this_os == OS_WINDOWS:
             self.data_path = os.path.join(os.getenv("APPDATA"), "RenewedVision", "ProPresenter6")
             self.thumbnail_cache = os.path.join(self.data_path, "Thumbnails", "Images")
+            self.playlist_path = os.path.join(self.data_path, "PlaylistData")
         elif this_os == OS_MACOSX:
             self.data_path = os.path.join(os.path.expanduser("~"),
                                           "Library", "Application Support", "RenewedVision", "ProPresenter6")
             self.thumbnail_cache = os.path.join(self.data_path, "cache")
+            self.playlist_path = os.path.join(self.data_path, "Playlists")
 
     def change_library(self, new_library):
         """ Changes the active library in this context (does not change it on the system). """
