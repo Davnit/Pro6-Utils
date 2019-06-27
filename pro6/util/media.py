@@ -19,10 +19,17 @@ class MediaFile:
         self.metadata = {}
         self._extract_failed = False
 
+    @property
+    def name(self):
+        return path.basename(self.path)
 
+    @property
+    def format(self):
+        return MEDIA_FORMATS.get(path.splitext(self.path)[1][1:].lower())
 
     def exists(self):
-        return path.isfile(self.source)
+        return path.isfile(self.path)
+
     def get_metadata(self, reload=False):
         """ Parses and returns file metadata. Invalid media files return None. """
         if (not self._extract_failed and len(self.metadata.values()) == 0) or reload:

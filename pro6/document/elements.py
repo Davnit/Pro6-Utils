@@ -121,7 +121,7 @@ class TextElement(DisplayElement):
 
 # This is an intermediate class for media file based slide elements (images and videos)
 class MediaElement(DisplayElement):
-    def __init__(self, tag, attrib=None):
+    def __init__(self, tag, source, attrib=None):
         defaults = {
             "flippedHorizontally": False,
             "flippedVertically": False,
@@ -131,13 +131,20 @@ class MediaElement(DisplayElement):
         defaults.update(attrib)
         super().__init__(tag, defaults)
 
+        if isinstance(source, MediaFile):
+            self.file = source
+        elif isinstance(source, str):
+            self.file = MediaFile(source)
+        else:
+            raise TypeError("Media source must be path or MediaFile object.")
+
+        self.display_name = self.file.name
+        self.format = self.file.format
+
         self.scaling_type = SCALE_FIT
         self.scaling_size = PointXY(1, 1)
         self.offset = PointXY(0, 0)
         self.opacity = 1.0
-        self.format = None
-
-        self.display_name = os.path.basename(self.source) if self.source else ""
 
     def reset_thumbnail(self):
         """ Resets the cached thumbnail for this element. """
@@ -153,7 +160,8 @@ class MediaElement(DisplayElement):
             "scaleSize": self.scaling_size,
             "imageOffset": self.offset,
             "opacity": self.opacity,
-            "format": self.format
+            "format": self.format,
+            "source": self.file.path if self.file else None
         }
         super().update(attrib)
         super().set_uuid()
@@ -167,6 +175,7 @@ class MediaElement(DisplayElement):
         self.offset = PointXY.parse(element.get("imageOffset"))
         self.opacity = float(element.get("opacity", str(self.opacity)))
         self.format = element.get("format", self.format)
+        self.file = MediaFile(element.get("source")) if "source" in element.attrib else None
         return self
 
     @classmethod
@@ -188,44 +197,18 @@ class MediaElement(DisplayElement):
 
 class ImageElement(MediaElement):
     def __init__(self, source, **extra):
-        if isinstance(source, MediaFile):
-            self.file = source
-            source = self.file.source
-        else:
-            self.file = MediaFile(source)
-
-        # Validate media type
-        mime = self.file.metadata.get("mime_type")
-        if not mime.startswith("image/"):
-            raise Exception("Media of type '%s' cannot be represented as an ImageElement." % mime)
-
-        extra["source"] = source
-        super().__init__("RVImageElement", extra)
-        self.source = source
-        self.format = MEDIA_FORMATS.get(os.path.splitext(os.path.basename(source))[1][1:])
+        super().__init__("RVImageElement", source, extra)
+        self.format = self.file.format
 
 
 class VideoElement(MediaElement):
     def __init__(self, source, **extra):
-        if isinstance(source, MediaFile):
-            self.file = source
-            source = self.file.source
-        else:
-            self.file = MediaFile(source)
-
-        # Validate media type
-        mime = self.file.metadata.get("mime_type")
-        if not mime.startswith("video/"):
-            raise Exception("Media of type '%s' cannot be represented as a VideoElement." % mime)
-
         defaults = {
-            "fieldType": 0,
-            "source": source
+            "fieldType": 0
         }
         defaults.update(extra)
-        super().__init__("RVVideoElement", defaults)
+        super().__init__("RVVideoElement", source, defaults)
 
-        self.source = source
         self.frame_rate = 0.0
         self.volume = 1.0
         self.in_point = 0
@@ -282,31 +265,15 @@ class AudioElement(XmlBackedObject):
             'cues' array.
     """
     def __init__(self, source, **extra):
-        if isinstance(source, MediaFile):
-            self.file = source
-            source = self.file.source
-        else:
-            self.file = MediaFile(source)
-
-        # Validate media type
-        mime = self.file.metadata.get("mime_type")
-        if not mime.startswith("audio/"):
-            raise Exception("Media of type '%s' cannot be represented as an AudioElement." % mime)
-
-        defaults = {
-            "source": source
-        }
-        defaults.update(extra)
-        super().__init__("RVAudioElement", defaults)
-
-        self.source = source
+        super().__init__("RVAudioElement", **extra)
+        self.file = source if isinstance(source, MediaFile) else MediaFile(source)
+        self.display_name = self.file.name
         self.volume = 1.0
         self.in_point = 0
         self.out_point = 0
         self.play_rate = 1.0
         self.audio_type = 0     # TODO: Figure out what this is
         self.playback_mode = PLAYBACK_STOP
-        self.display_name = os.path.basename(self.source)
 
     def write(self):
         attrib = {
@@ -316,7 +283,8 @@ class AudioElement(XmlBackedObject):
             "playRate": self.play_rate,
             "audioType": self.audio_type,
             "loopBehavior": self.playback_mode,
-            "displayName": self.display_name
+            "displayName": self.display_name,
+            "source": prepare_path(self.file.path),
         }
         super().update(attrib)
         return super().write()
@@ -324,6 +292,7 @@ class AudioElement(XmlBackedObject):
     def read(self, element):
         super().read(element)
 
+        self.file = MediaFile(unprepare_path(element.get("source")))
         self.volume = float(element.get("volume", str(self.volume)))
         self.in_point = int(element.get("inPoint", str(self.in_point)))
         self.out_point = int(element.get("outPoint", str(self.out_point)))
