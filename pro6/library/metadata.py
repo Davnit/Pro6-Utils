@@ -1,5 +1,5 @@
 
-from ..util.general import parse_date, unprepare_path
+from ..util.general import parse_date
 from ..util.xmlhelp import RV_XML_VARNAME
 
 from os import path
@@ -12,7 +12,7 @@ class CCLI:
         self.artist = values.get("CCLIArtistCredits")
         self.author = values.get("CCLIAuthor")
         self.year = values.get("CCLICopyrightYear")
-        if len(self.year) > 0:
+        if self.year and len(self.year) > 0:
             self.year = int(self.year)
         self.display = values.get("CCLIDisplay", "false").lower() in ["true", "1"]
         self.title = values.get("CCLISongTitle")
