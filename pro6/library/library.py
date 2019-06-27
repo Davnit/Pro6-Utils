@@ -38,7 +38,7 @@ class DocumentLibrary:
         title = {t.lower(): t for t in self.documents}.get(title.lower())
 
         # Remove the file
-        self.documents.remove(title)
+        del self.documents[title]
         fs_delete(path.join(self.path, title + ".pro6"))
 
     def search(self, s, include_content=False, flags=re.IGNORECASE):
@@ -48,14 +48,17 @@ class DocumentLibrary:
         query = re.compile(s, flags)
 
         # Search titles first (quick)
-        for title in self.documents:
+        for title, doc in self.documents.items():
             if query.search(title):
-                results.append(title)
+                results.append(doc)
 
         # Optionally search "plain text" content, if available (slow)
         if include_content:
             # Only search documents that haven't already matched by title
-            for title in [d for d in self.documents if d not in results]:
+            for title, doc in self.documents.items():
+                if doc in results:
+                    continue
+
                 # Directly read the XML for this to hopefully improve performance.
                 tree = Xml.parse(path.join(self.path, title + ".pro6"))
 
@@ -77,6 +80,6 @@ class DocumentLibrary:
                                 break
 
                 if found_match:
-                    results.append(title)
+                    results.append(doc)
 
         return results
