@@ -14,17 +14,16 @@ NODE_PLAYLIST = "3"     # Node containing cues to documents and media files.
 
 
 class PlaylistNode(XmlBackedObject):
-    def __init__(self, name, **extra):
+    def __init__(self, name, node_type=NODE_PLAYLIST, **extra):
         defaults = {
             "smartDirectoryURL": None,
-            "hotFolderType": 2,
-            RV_XML_VARNAME: "rootNode"
+            "hotFolderType": 2
         }
         defaults.update(extra)
         super().__init__("RVPlaylistNode", defaults)
 
         self.name = name
-        self.type = NODE_ROOT
+        self.type = node_type
         self.expanded = False
         self.modified = datetime.now()
 
@@ -64,7 +63,7 @@ class PlaylistNode(XmlBackedObject):
             is_list = isinstance(item, list)
             target = item[0] if is_list else item
 
-            if child.hasattr("name") and child.name.lower() == target.lower():
+            if hasattr(child, "name") and child.name.lower() == target.lower():
                 # If it's a list and we're not on the last item, only return matching nodes.
                 if is_list and len(item) > 1 and isinstance(child, PlaylistNode):
                     return child.find(path[1:] if len(item) > 2 else item[1])
@@ -84,6 +83,8 @@ class PlaylistNode(XmlBackedObject):
             "type": self.type,
             "isExpanded": self.expanded
         }
+        if self.type == NODE_ROOT:
+            attrib[RV_XML_VARNAME] = "rootNode"
         super().update(attrib)
         super().set_uuid()
 
@@ -103,7 +104,7 @@ class PlaylistNode(XmlBackedObject):
         self.modified = datetime.fromisoformat(mod_date) if len(mod_date) > 0 else None
 
         self.children = []
-        for e in element.find("array[@" + RV_XML_VARNAME + "='children'"):
+        for e in element.find("array[@" + RV_XML_VARNAME + "='children']"):
             if e.tag == "RVPlaylistNode":
                 child = PlaylistNode(e.get("displayName")).read(e)
                 child.parent = self
