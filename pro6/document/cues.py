@@ -46,9 +46,12 @@ class MediaCue(XmlBackedObject):
             media = self.element.write()
             media.set(RV_XML_VARNAME, "element")
             e.append(media)
-            e.set("UUID", self.element.get_uuid())
+            if self.element.get_uuid():
+                e.set("UUID", self.element.get_uuid())
+            else:
+                super().set_uuid()
         else:
-            if self.element is None:
+            if not self.element:
                 raise TypeError("Cue media must not be NoneType.")
             e.append(self.element)
         return e
@@ -72,14 +75,14 @@ class MediaCue(XmlBackedObject):
         if len(children) > 1:
             raise ValueError("Ambiguous MediaCue child elements. Found %i." % len(children))
 
+        source = unprepare_path(children[0].get("source"))
         if children[0].tag in MEDIA_ELEMENTS:
-            source = unprepare_path(children[0].get("source"))
             self.element = MEDIA_ELEMENTS[children[0].tag](source).read(children[0])
-            self.source = self.element.source
+            self.source = source
         else:
             print("Unsupported media element found in cue '%s': %s" % (self.display_name, children[0].tag))
             self.element = children[0]
-            self.source = self.element.get("source")
+            self.source = source
         return self
 
     @classmethod
@@ -94,6 +97,7 @@ class MediaCue(XmlBackedObject):
 class AudioCue(MediaCue):
     def __init__(self, source, element=None, **extra):
         super().__init__(source, element, **extra)
+        self._tag = "RVAudioCue"
 
 
 class TimeBasedCue(XmlBackedObject):
