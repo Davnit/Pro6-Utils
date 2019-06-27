@@ -10,9 +10,9 @@ import xml.etree.ElementTree as Xml
 
 
 class DocumentLibrary:
-    def __init__(self, title, library_path=None):
-        self.title = title
+    def __init__(self, library_path, title=None):
         self.path = path.normpath(path.expanduser(library_path))
+        self.title = title or path.basename(self.path)
         self.documents = {}
 
         for file in listdir(self.path):
