@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 setup(
@@ -9,6 +9,6 @@ setup(
     description="Interface for manipulating ProPresenter 6 environments.",
     author="Davnit",
     author_email="david@davnit.net",
-    packages=["pro6"],
+    packages=find_packages(),
     install_requires=["hachoir>=3.0a3"]
 )
