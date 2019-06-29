@@ -101,7 +101,7 @@ class PlaylistNode(XmlBackedObject):
         self.expanded = element.get("isExpanded") in ["true", "1"]
 
         mod_date = element.get("modifiedDate")
-        self.modified = datetime.fromisoformat(mod_date) if len(mod_date) > 0 else None
+        self.modified = datetime.strptime(mod_date, "%Y-%m-%dT%H:%M:%S%z") if len(mod_date) > 0 else None
 
         self.children = []
         for e in element.find("array[@" + RV_XML_VARNAME + "='children']"):
