@@ -2,6 +2,7 @@
 from .cues import DocumentCue
 
 from ..document import MediaCue, AudioCue
+from ..util.general import parse_date
 from ..util.xmlhelp import XmlBackedObject, RV_XML_VARNAME, create_array
 
 from datetime import datetime
@@ -99,9 +100,7 @@ class PlaylistNode(XmlBackedObject):
         self.name = element.get("displayName", self.name)
         self.type = element.get("type", self.type)
         self.expanded = element.get("isExpanded") in ["true", "1"]
-
-        mod_date = element.get("modifiedDate")
-        self.modified = datetime.strptime(mod_date, "%Y-%m-%dT%H:%M:%S%z") if len(mod_date) > 0 else None
+        self.modified = parse_date(element.get("modifiedDate"))
 
         self.children = []
         for e in element.find("array[@" + RV_XML_VARNAME + "='children']"):
