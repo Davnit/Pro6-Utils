@@ -52,7 +52,7 @@ class DisplayElement(XmlBackedObject):
         e = super().write()
         e.append((self.position or Rect3D()).write("position"))
         e.append((self.shadow or Shadow()).write("shadow"))
-        e.append((self.stroke or Stroke().write()))
+        e.append((self.stroke or Stroke()).write())
         return e
 
     def read(self, element):
