@@ -9,5 +9,6 @@ setup(
     description="Interface for manipulating ProPresenter 6 environments.",
     author="Davnit",
     author_email="david@davnit.net",
+    packages=["pro6"],
     install_requires=["hachoir>=3.0a3"]
 )
