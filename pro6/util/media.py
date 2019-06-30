@@ -16,7 +16,7 @@ MEDIA_FORMATS = {
 class MediaFile:
     def __init__(self, source):
         self.path = source or ""
-        self.metadata = {}
+        self.metadata = None
         self._extract_failed = False
 
     @property
@@ -32,14 +32,14 @@ class MediaFile:
 
     def get_metadata(self, reload=False):
         """ Parses and returns file metadata. Invalid media files return None. """
-        if (not self._extract_failed and len(self.metadata.values()) == 0) or reload:
+        if (self._extract_failed is False and self.metadata is None) or reload:
             if self.exists():
                 parser = hachoir.parser.createParser(self.path)
                 if parser:
                     with parser:
                         self.metadata = hachoir.metadata.extractMetadata(parser)
 
-            if len(self.metadata.values()) == 0:
+            if not self.metadata:
                 self._extract_failed = True
 
         return self.metadata
