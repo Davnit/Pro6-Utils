@@ -140,6 +140,7 @@ class MediaElement(DisplayElement):
 
         self.display_name = self.file.name
         self.format = self.file.format
+        self.source = self.file.path
 
         self.scaling_type = SCALE_FIT
         self.scaling_size = PointXY(1, 1)
