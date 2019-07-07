@@ -154,6 +154,7 @@ class MediaElement(DisplayElement):
         thumb_path = os.path.join(pro6_install.thumbnail_cache, self.get_uuid() + ".jpg")
         if os.path.isfile(thumb_path):
             os.remove(thumb_path)
+            return True
 
     def write(self):
         attrib = {
