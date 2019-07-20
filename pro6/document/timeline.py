@@ -10,6 +10,10 @@ class TimelineCue(TimeBasedCue):
         self.slide_index = 0
 
     def write(self):
+        # Ensure the object has a UUID to reference.
+        if isinstance(self.object, XmlBackedObject):
+            self.object.set_uuid()
+
         attrib = {
             "slideIndex": self.slide_index,
             "representedObjectUUID": self.object.get_uuid() if isinstance(self.object, XmlBackedObject) else self.object
@@ -77,7 +81,7 @@ class Timeline(XmlBackedObject):
         for index in range(len(slides)):
             cue = TimelineCue(slides[index])
             cue.slide_index = index
-            cue.display_name = " %i" % (index + 1)
+            cue.display_name = "Slide %i" % (index + 1)
             cue.timestamp = (index * interval)
             cue.enabled = True
 
