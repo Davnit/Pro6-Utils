@@ -53,7 +53,7 @@ def main():
     parser.add_argument("--width", type=int, default=default_size[0], help="The width of the created document.")
     parser.add_argument("--height", type=int, default=default_size[1], help="The height of the created document.")
     parser.add_argument("--interval", type=int, help="Seconds between each slide on the timeline.")
-    parser.add_argument("--loop", type=bool, default=False, help="If the timeline should loop.")
+    parser.add_argument("--loop", action="store_true", help="If the timeline should loop.")
     parser.add_argument("--scaling", type=str.lower, choices=list(SCALE_MODES.keys()), default=scaling,
                         help="How the image should be scaled to the document.")
     parser.add_argument("--outdir", type=str, help="The directory where the document should be saved.")
