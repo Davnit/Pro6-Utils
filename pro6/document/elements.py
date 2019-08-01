@@ -67,7 +67,7 @@ class DisplayElement(XmlBackedObject):
         self.delay = float(element.get("displayDelay", str(self.delay)))
         self.bezel_radius = float(element.get("bezelRadius", str(self.bezel_radius)))
         self.rotation = float(element.get("rotation", str(self.rotation)))
-        self.source = unprepare_path(element.get("source", self.source))
+        self.source = unprepare_path(element.get("source", self.source)) if "source" in element.attrib else None
         return self
 
 
@@ -92,7 +92,12 @@ class TextElement(DisplayElement):
         super()._attrib.update(attrib)
         e = super().write()
 
-        pairs = [("RTFData", self.rtf), ("PlainText", self.text), ("WinFlowData", self.flow_data), ("WinFontData", self.font_data)]
+        pairs = [
+            ("RTFData", self.rtf),
+            ("PlainText", self.text),
+            ("WinFlowData", self.flow_data),
+            ("WinFontData", self.font_data)
+        ]
         for var, value in pairs:
             sub = Xml.Element("NSString", {RV_XML_VARNAME: var})
             sub.text = base64.b64encode(value).decode('ascii')
