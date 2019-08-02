@@ -1,5 +1,5 @@
 
-from ..util.general import parse_date
+from ..util.general import parse_date, unprepare_path
 from ..util.xmlhelp import RV_XML_VARNAME
 
 from os import path
@@ -54,4 +54,4 @@ class DocumentMetadata:
             if background:
                 source = list(background)[0].get("source")
                 if source:
-                    self.media.append(source)
+                    self.media.append(unprepare_path(source))
