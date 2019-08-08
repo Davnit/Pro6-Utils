@@ -39,10 +39,9 @@ class MediaFile:
                     with parser:
                         self.metadata = hachoir.metadata.extractMetadata(parser)
 
-            if not self.metadata:
-                self._extract_failed = True
+            self._extract_failed = (self.metadata is None)
 
-        return self.metadata
+        return self.metadata or {}
 
     def frame_size(self, default=None):
         """ Returns a tuple containing (width, height) of the media content. """
