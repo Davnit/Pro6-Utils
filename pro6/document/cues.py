@@ -1,11 +1,13 @@
 
 from .elements import MEDIA_ELEMENTS, MediaElement, AudioElement
 
+from ..preferences import active as pro6_install
+
 from ..util.constants import *
 from ..util.general import unprepare_path
 from ..util.xmlhelp import XmlBackedObject, RV_XML_VARNAME
 
-from os import path
+from os import path, listdir, remove
 
 
 class MediaCue(XmlBackedObject):
@@ -25,6 +27,17 @@ class MediaCue(XmlBackedObject):
 
         self.element = element or (MediaElement.create(self.source) if source else None)
         self.next_cue = None            # UUID of linked cue object
+
+    def reset_thumbnail(self):
+        """ Resets the cached thumbnail for this element. """
+        if not pro6_install:
+            raise Exception("ProPresenter installation not found.")
+
+        # This file name seems to vary between upper(), lower() and .png/.jpg so just iterate and compare base.lower()
+        for file in listdir(pro6_install.thumbnail_cache):
+            if path.basename(path.splitext(file)[0]).lower() == self.get_uuid().lower():
+                remove(path.join(pro6_install.thumbnail_cache, file))
+                return True
 
     def write(self):
         attrib = {
