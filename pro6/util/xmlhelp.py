@@ -278,7 +278,10 @@ class Stroke(XmlBackedObject):
         if element.get(RV_XML_VARNAME) != "stroke":
             raise ValueError("Dictionary element is not ID'd as a stroke object.")
 
-        self.width = float(element.find("NSNumber").text)
-        self.color = ColorString.parse(element.find("NSColor").text)
+        e = element.find("NSNumber")
+        self.width = float(e.text) if e else self.width
+
+        e = element.find("NSColor")
+        self.color = ColorString.parse(e.text) if e else self.color
         return self
 
