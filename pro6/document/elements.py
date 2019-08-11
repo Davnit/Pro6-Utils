@@ -156,10 +156,12 @@ class MediaElement(DisplayElement):
         """ Resets the cached thumbnail for this element. """
         if not pro6_install:
             raise Exception("ProPresenter installation not found.")
-        thumb_path = os.path.join(pro6_install.thumbnail_cache, self.get_uuid() + ".jpg")
-        if os.path.isfile(thumb_path):
-            os.remove(thumb_path)
-            return True
+
+        # This file name seems to vary between upper(), lower() and .png/.jpg so just iterate and compare base.lower()
+        for file in os.listdir(pro6_install.thumbnail_cache):
+            if os.path.basename(os.path.splitext(file)[0]).lower() == self.get_uuid().lower():
+                os.remove(os.path.join(pro6_install.thumbnail_cache, file))
+                return True
 
     def write(self):
         attrib = {
