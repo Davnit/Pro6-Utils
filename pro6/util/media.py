@@ -50,18 +50,20 @@ class MediaFile:
                 or not isinstance(default[0], int) or not isinstance(default[1], int):
             raise ValueError("Invalid frame size default value. Must be (width, height).")
 
-        if not self.get_metadata() or "width" not in self.metadata or "height" not in self.metadata:
-            return default
-        else:
+        self.get_metadata()
+        try:
             width = self.metadata.get("width")
             height = self.metadata.get("height")
-            if len(width) == 0 or len(height) == 0:
-                return default
-            else:
-                return int(width), int(height)
+            return width, height
+        except ValueError:
+            return default
 
     def duration(self):
         """ Returns the length of a media file, in seconds. """
         if not self.get_metadata():
             return 0
-        return self.metadata.get("duration").total_seconds() if "duration" in self.metadata else 0
+        try:
+            dur = self.metadata.get("duration")
+            return dur.total_seconds()
+        except ValueError:
+            return 0
