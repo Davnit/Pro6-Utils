@@ -13,6 +13,11 @@ MEDIA_FORMATS = {
 }
 
 
+class InvalidMediaFileError(BaseException):
+    def __init__(self, file):
+        self.file = file
+
+
 class MediaFile:
     def __init__(self, source):
         self.path = source or ""

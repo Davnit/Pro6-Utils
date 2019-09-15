@@ -1,7 +1,7 @@
 
 from ..util.constants import *
 from ..util.general import prepare_path, unprepare_path
-from ..util.media import MediaFile, MEDIA_FORMATS
+from ..util.media import MediaFile, MEDIA_FORMATS, InvalidMediaFileError
 from ..util.xmlhelp import RV_XML_VARNAME, XmlBackedObject, ColorString, Rect3D, PointXY, Shadow, Stroke
 
 import base64
@@ -180,6 +180,9 @@ class MediaElement(DisplayElement):
 
         file = MediaFile(source)
         mime = file.get_metadata().get("mime_type")
+        if not mime:
+            raise InvalidMediaFileError(file)
+
         if mime.startswith("image/"):
             return ImageElement(file, **extra)
         elif mime.startswith("video/"):
