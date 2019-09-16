@@ -1,5 +1,6 @@
 
 from .metadata import DocumentMetadata
+from ..preferences import install as pro6_install
 from ..util.xmlhelp import RV_XML_VARNAME
 
 import base64
@@ -10,6 +11,8 @@ import xml.etree.ElementTree as Xml
 
 
 class DocumentLibrary:
+    active = None
+
     def __init__(self, library_path, title=None):
         self.path = path.normpath(path.expanduser(library_path))
         self.title = title or path.basename(self.path)
@@ -83,3 +86,7 @@ class DocumentLibrary:
                     results.append(doc)
 
         return results
+
+
+if pro6_install:
+    DocumentLibrary.active = DocumentLibrary(pro6_install.get_library(), pro6_install.active_library)

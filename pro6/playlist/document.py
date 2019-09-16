@@ -1,6 +1,7 @@
 
 from .node import PlaylistNode
 
+from ..preferences import install as pro6_install
 from ..util.compat import *
 from ..util.constants import RV_VERSION_NUMBER
 from ..util.xmlhelp import XmlBackedObject, RV_XML_VARNAME, create_array
@@ -10,6 +11,8 @@ from xml.etree import ElementTree as Xml
 
 
 class PlaylistDocument(XmlBackedObject):
+    active = None
+
     def __init__(self, **extra):
         defaults = {
             "versionNumber": RV_VERSION_NUMBER,
@@ -57,3 +60,8 @@ class PlaylistDocument(XmlBackedObject):
         document.path = file_path
 
         return document
+
+
+if pro6_install:
+    PlaylistDocument.active = \
+        PlaylistDocument.load(path.join(pro6_install.playlist_path, pro6_install.active_library + ".pro6pl"))

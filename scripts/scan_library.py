@@ -18,7 +18,7 @@ def main():
             print("ERROR: No library specified and a ProPresenter installation could not be found.")
             exit(1)
         else:
-            library = DocumentLibrary(pro6_install.get_library(), pro6_install.active_library)
+            library = DocumentLibrary.active
     else:
         title = path.basename(args.library[:-1] if args.library[-1] in ['/', '\\'] else args.library)
         library = DocumentLibrary(args.library, title)

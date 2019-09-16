@@ -37,10 +37,9 @@ def main():
         if not args.document:
             document = PlaylistDocument.load(path.join(pro6_install.playlist_path, title + ".pro6pl"))
     elif pro6_install:
-        library = DocumentLibrary(pro6_install.get_library(), pro6_install.active_library)
+        library = DocumentLibrary.active
         if not args.document:
-            default_path = path.join(pro6_install.playlist_path, pro6_install.active_library + ".pro6pl")
-            document = PlaylistDocument.load(default_path)
+            document = PlaylistDocument.active
 
     if library:
         print("Using library:", library.path)
