@@ -4,7 +4,7 @@ from .group import SlideGroup
 from .slide import DisplaySlide
 from .timeline import Timeline
 
-from ..preferences import active as pro6_install
+from ..preferences import install as pro6_install
 
 from ..util.compat import *
 from ..util.constants import RV_VERSION_NUMBER

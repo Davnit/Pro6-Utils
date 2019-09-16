@@ -1,6 +1,6 @@
 
 from pro6.document import PresentationDocument, MediaCue
-from pro6.preferences import active as pro6_install
+from pro6.preferences import install as pro6_install
 from pro6.util.constants import *
 
 from argparse import ArgumentParser

@@ -1,7 +1,7 @@
 
 from .elements import MEDIA_ELEMENTS, MediaElement, AudioElement
 
-from ..preferences import active as pro6_install
+from ..preferences import install as pro6_install
 
 from ..util.constants import *
 from ..util.general import unprepare_path

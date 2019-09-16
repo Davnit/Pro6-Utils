@@ -1,6 +1,6 @@
 
 from pro6.library import DocumentLibrary
-from pro6.preferences import active as pro6_install
+from pro6.preferences import install as pro6_install
 
 from argparse import ArgumentParser
 from os import path
