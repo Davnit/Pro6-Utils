@@ -243,9 +243,9 @@ class VideoElement(MediaElement):
 
         self.frame_rate = float(element.get("frameRate", str(self.frame_rate)))
         self.volume = float(element.get("audioVolume", str(self.volume)))
-        self.in_point = int(element.get("inPoint", str(self.in_point)))
-        self.out_point = int(element.get("outPoint", str(self.out_point)))
-        self.end_point = int(element.get("endPoint", str(self.end_point)))
+        self.in_point = float(element.get("inPoint", str(self.in_point)))
+        self.out_point = float(element.get("outPoint", str(self.out_point)))
+        self.end_point = float(element.get("endPoint", str(self.end_point)))
         self.play_rate = float(element.get("playRate", str(self.play_rate)))
         self.playback_mode = element.get("playbackBehavior", self.playback_mode)
         self.natural_size = PointXY.parse(element.get("naturalSize"))
