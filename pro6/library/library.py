@@ -14,7 +14,7 @@ class DocumentLibrary:
     active = None
 
     def __init__(self, library_path, title=None):
-        self.path = path.normpath(path.expanduser(library_path))
+        self.path = path.expanduser(path.expandvars(path.normpath(library_path)))
         self.title = title or path.basename(self.path)
         self.documents = {}
 
