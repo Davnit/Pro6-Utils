@@ -64,9 +64,12 @@ class Pro6Preferences:
                 return self.get_library()
         return None
 
-    def get_library(self):
-        """ Returns the path to the active library. """
-        return self.libraries.get(self.active_library)
+    def get_library(self, lib_name=None):
+        """ Returns the path to a library. """
+        if lib_name:
+            return {name.lower(): library for name, library in self.libraries.items()}.get(lib_name.lower())
+        else:
+            return self.libraries.get(self.active_library)
 
     @classmethod
     def load(cls, file=None):
