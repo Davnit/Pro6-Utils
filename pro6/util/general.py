@@ -25,6 +25,9 @@ def prepare_path(path_str, enviro=None):
 
 
 def unprepare_path(path_str):
+    if path_str is None:
+        return ""
+    
     pth = urlparse(path_str)           # Break the path down into components (specifically for Windows where it's a URL)
     if pth.scheme == "file":
         path_str = pth.path            # If the path is to a file get rid of the extra markers
